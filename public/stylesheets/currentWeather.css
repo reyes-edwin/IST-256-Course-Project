@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    background: lightskyblue;
+}
+
+.logo {
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 3px;
+    font-size: 18px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    width: 30%;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-family: monospace;
+    height: 100vh;
+    line-height: 1.4;
+}
+
+.container {
+    margin: 15rem 40rem 0 40rem;
+    padding: 10px;
+    background: darkgray;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    background-image: url(../images/pexels-alex-conchillos-3941855.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.city {
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    padding: 30px;
+}
+
+.temp {
+    color: white;
+    font-size: 42px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.condition {
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    padding: 30px;
+}
