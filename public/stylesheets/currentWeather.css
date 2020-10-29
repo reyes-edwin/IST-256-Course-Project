@@ -1,3 +1,5 @@
+/* Imported font from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +10,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     padding: 1rem;
-    background: lightskyblue;
+    background: #7f7b82ff;
 }
 
 .logo {
@@ -16,6 +18,7 @@ nav {
     text-transform: capitalize;
     letter-spacing: 3px;
     font-size: 18px;
+    font-weight: 700;
 }
 
 .nav-links {
@@ -24,11 +27,16 @@ nav {
     justify-content: space-around;
     width: 30%;
 }
+.nav-links img {
+    height: 18px;
+    color: white;
+    margin-top: 3.5px;
+}
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 18px;
 }
 
@@ -37,39 +45,64 @@ nav {
 }
 
 body {
-    font-family: monospace;
+    font-family: 'Quicksand', sans-serif;
     height: 100vh;
     line-height: 1.4;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(135,206,250,1) 100%); */
+    background-image: url(../images/raindrop-3629132_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
-    margin: 15rem 40rem 0 40rem;
+    margin: 15rem 50rem 0rem 50rem;
     padding: 10px;
-    background: darkgray;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    background-image: url(../images/pexels-alex-conchillos-3941855.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: rgb(127,123,130);
+    background: linear-gradient(180deg, rgba(127,123,130,1) 0%, rgba(60,60,60,1) 100%);
+}
+
+.weather {
+    font-weight: 600;
+    color: white;
+    text-align: center;
 }
 
 .city {
-    text-align: center;
-    color: white;
-    font-size: 32px;
-    padding: 30px;
+    font-size: 24px;
+    padding: 20px;
 }
-
 .temp {
-    color: white;
-    font-size: 42px;
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
+    font-size: 64px;
+    font-weight: 700;
+    padding: 20px;
+}
+.condition {
+    font-size: 24px;
+    padding: 20px;
+}
+.rainy {
+    height: 8rem;
+    margin-left: 2rem;
+    padding: 20px;
 }
 
-.condition {
+.current {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.current img {
+    height: 2em;
+}
+
+.current p {
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    align-items: center;
     color: white;
-    font-size: 32px;
-    text-align: center;
-    padding: 30px;
 }
