@@ -17,7 +17,8 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+  color: whitesmoke;
 }
 
 .logo {
@@ -30,32 +31,45 @@ a {
   padding: 1rem 0rem;
 }
 
-#locationInfo {
-  font-weight: 400;
+main {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 90%;
+  height: 80%;
   flex-direction: column;
 }
 
-#zipInput {
+.locationInfo {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  font-weight: 400;
+  width: auto;
+  height: auto;
+  padding: 2em;
+}
+
+
+
+#cityInput {
   display: inline;
   color: #87cefaff;
 }
 
 .locationOption {
   padding: 10px 24px;
-  background-color: #e6e49fff;
-  opacity: .85;
-  color: #273043ff;
+  background-image: linear-gradient(to bottom, #273043ff, #e6e49fff);
+  color: whitesmoke;
   border-radius: 8px;
+  border-style: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
   font: 18pt;
+  text-decoration: none;
 }
 
 #signIn {
+  background-image: none;
   background-color: whitesmoke;
-  opacity: .95;
   box-shadow: 0px 0px 7px #87cefaff;
+  color: #273043ff;
 }
