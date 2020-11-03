@@ -24,7 +24,7 @@ nav {
 .nav-links {
     display: flex;
     justify-content: space-around;
-    width: 40%;
+    width: 30%;
 }
 .nav-links li {
     list-style: none;
@@ -47,17 +47,6 @@ nav {
     text-decoration: underline;
 }
 
-.burger div {
-    width: 25px;
-    height: 3px;
-    background-color: rgb(226, 226, 226);
-    margin: 3px;
-}
-
-.burger {
-    display: none;
-}
-
 body {
     font-family: 'Quicksand', sans-serif;
     height: 100vh;
@@ -72,7 +61,7 @@ body {
 .container {
     margin: 15rem 45rem 0rem 45rem;
     padding: 10px;
-    background: white;
+    background: rgb(226, 226, 226);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     background: rgb(127,123,130);
@@ -81,7 +70,7 @@ body {
 
 .weather {
     font-weight: 600;
-    color: white;
+    color: rgb(226, 226, 226);
     text-align: center;
 }
 
@@ -118,23 +107,24 @@ body {
     font-weight: 600;
     font-size: 14px;
     align-items: center;
-    color: white;
+    color: rgb(226, 226, 226);
 }
 
-@media screen and (max-width:1920px) {
+@media screen and (max-width:1980px) {
     .nav-links {
         width: 50%;
     }
 
     .container {
-        margin: 8rem 30rem 0rem 30rem;
+        margin: 10rem 35rem 0rem 35rem;
         padding: 10px;
-        background: white;
+        background: rgb(226, 226, 226);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         background: rgb(127,123,130);
         background: linear-gradient(180deg, rgba(127,123,130,1) 0%, rgba(60,60,60,1) 100%);
     }
 }
+
 
 
