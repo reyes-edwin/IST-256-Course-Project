@@ -14,7 +14,7 @@ nav {
 }
 
 .logo {
-  color: white;
+  color: #e2e2e2;
   text-transform: capitalize;
   letter-spacing: 3px;
   font-size: 18px;
@@ -29,12 +29,12 @@ nav {
 }
 .nav-links img {
   height: 18px;
-  color: white;
+  color: #e2e2e2;
   margin-top: 3.5px;
 }
 
 .nav-links a {
-  color: white;
+  color: #e2e2e2;
   text-decoration: none;
   font-weight: 600;
   font-size: 18px;
@@ -67,7 +67,7 @@ body {
 }
 
 .grids {
-  border: 1px solid white;
+  border: 1px solid #e2e2e2;
   border-radius: 10px;
   background-color: #273043ff;
   margin-top: 30%;
@@ -93,7 +93,7 @@ figcaption {
 }
 
 h3 {
-  color: white;
+  color: #e2e2e2;
   padding: 0.75rem;
   font-size: 1.25rem;
 }
@@ -102,7 +102,7 @@ h3 {
   font-size: 1rem;
   line-height: 1.5;
   padding: 1rem 0.75rem;
-  color: white;
+  color: #e2e2e2;
 }
 
 a {
@@ -116,7 +116,7 @@ footer {
   width: 100%;
   height: 2.5rem;
   background-color: #273043ff;
-  color: white;
+  color: #e2e2e2;
   font-weight: 600;
   padding: 2.3rem;
 }
@@ -125,15 +125,15 @@ footer p {
   text-align: center;
 }
 
-@media screen and (max-width:1920px) {
+@media screen and (max-width:1980px) {
   .nav-links {
       width: 50%;
   }
 
   .container {
-      margin: 8rem 30rem 0rem 30rem;
+      margin: 10rem 35rem 0rem 35rem;
       padding: 10px;
-      background: white;
+      background: #e2e2e2;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       background: rgb(127,123,130);
