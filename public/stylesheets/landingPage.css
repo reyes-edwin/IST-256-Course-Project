@@ -67,9 +67,26 @@ main {
   text-decoration: none;
 }
 
+#cityInput > #cityName {
+  text-align: center;
+  padding: 8px 10px;
+  margin: 1rem;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+#cityInput > button {
+  margin: .5rem;
+}
+
+.locationInfo > p {
+  margin: .5rem;
+}
+
 #signIn {
   background-image: none;
-  background-color: whitesmoke;
+  background-color: rgba(255, 255, 255, .8);
   box-shadow: 0px 0px 7px #87cefaff;
   color: #273043ff;
+  margin-top: 2rem;
 }
