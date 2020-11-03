@@ -124,3 +124,23 @@ footer {
 footer p {
   text-align: center;
 }
+
+@media screen and (max-width:1920px) {
+  .nav-links {
+      width: 50%;
+  }
+
+  .container {
+      margin: 8rem 30rem 0rem 30rem;
+      padding: 10px;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      background: rgb(127,123,130);
+      background: linear-gradient(180deg, rgba(127,123,130,1) 0%, rgba(60,60,60,1) 100%);
+  }
+
+  .grids {
+    margin-top: 20%;
+  }
+}

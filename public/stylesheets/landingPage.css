@@ -24,19 +24,20 @@ a {
   color: white;
   text-transform: capitalize;
   letter-spacing: 3px;
-  font-size: 18px;
+  font: 18px;
   font-weight: 700;
   text-align: left;
+  padding: 1rem 0rem;
 }
 
 #locationInfo {
-  margin: auto;
   font-weight: 400;
-  position: absolute;
-  bottom: 40%;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-
+  height: 90%;
+  flex-direction: column;
 }
 
 #zipInput {

@@ -1,0 +1,76 @@
+/* Imported font from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: #e6e49fff;
+    font-family: 'Quicksand', sans-serif;
+    background-image: linear-gradient(to bottom, #273043ff, #7f7b82ff);
+    text-align: center;
+    
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0rem;
+    background: #7f7b82ff;
+    flex-direction: row;
+}
+
+.logo {
+  color: white;
+  text-transform: capitalize;
+  letter-spacing: 3px;
+  font: 18pt;
+  font-weight: 700;
+  text-align: left;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    max-width: 80%;
+    min-width: 40%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.nav-links img {
+    height: 18px;
+    color: white;
+    margin-top: 3.5px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+#signIn {
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90%;
+    flex-direction: column;
+}
+
+#signIn img {
+    width: 350px;
+    height: 450px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px grey;
+}
