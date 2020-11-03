@@ -14,19 +14,21 @@
   <div class="logo">
     <h1>RainyDay</h1>
   </div>
-  <div id="locationInfo">
-    <h1>Welcome to RainyDay!</h1>
-    <p>Provide your location below or sign in to start:</p><br>
-    <form id="zipInput"> <!--TODO: Eventually add an action to this-->
-      <label for=zipCode>Enter your zip code: </label>
-      <input type="text" id="zipCode" name="zipCode"><br><br>
-      <button type="submit" class="locationOption"><a href="CurrentWeather.html">Submit</a></button> <!--Just doing it this way until I have a way to link the submit action to CurrentWeather.html in JavaScript-->
-      <label> OR </label>
-      <button class="locationOption"><a href="CurrentWeather.html">Auto-detect Location</a></button>
-    </form>
-    <br><br>
-    <button class="locationOption" id="signIn">Sign in with Google!</button>
-  </div>
+  <main>
+    <div class="locationInfo">
+      <h1>Welcome to RainyDay!</h1>
+      <p>Provide your location below or sign in to start:</p><br>
+      <form id="cityInput"> <!--TODO: Eventually add an action to this-->
+        <label for="cityName"></label>Enter your city: </label>
+        <input type="text" id="cityName" name="cityName"><br><br>
+        <button type="submit" class="locationOption"><a href="CurrentWeather.html">Submit</a></button> <!--Just doing it this way until I have a way to link the submit action to CurrentWeather.html in JavaScript-->
+        <label> OR </label>
+        <button class="locationOption"><a href="CurrentWeather.html">Auto-detect Location</a></button>
+      </form>
+      <br><br><br>
+      <button id="signIn" class="locationOption" >Sign in with Google!</button>
+    </div>
+  </main>
 </body>
 
 </html>
