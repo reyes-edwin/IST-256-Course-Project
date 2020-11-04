@@ -9,49 +9,81 @@
 body {
     color: #e6e49fff;
     font-family: 'Quicksand', sans-serif;
-    background-image: linear-gradient(to bottom, #7f7b82ff, #273043ff);
+    background: linear-gradient(180deg, #7f7b80 0%, #273043 100%);
 }
-nav {
+/* Start of the nav section */
+.nav-1 {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    background: #273043;
     min-height: 8vh;
-    background: #273043ff;
-}
-
-.logo {
-    color: rgb(226, 226, 226);
+    align-items: center;
+  }
+  .logo {
     text-transform: capitalize;
-    letter-spacing: 5px;
+    color: white;
     font-size: 20px;
     font-weight: 700;
-}
-
-.nav-links {
+    padding-left: 100px;
+  }
+  
+  .nav-2 {
     display: flex;
-    justify-content: space-around;
-    width: 30%;
-}
-.nav-links li {
+    justify-content: center;
+    padding: 0.5rem;
+    background: #7f7b82;
+  }
+  
+  .nav-links {
+    display: flex;
     list-style: none;
-}
-.nav-links img {
-    height: 18px;
-    color: #e2e2e2;
-    margin-top: 3.5px;
-}
-
-.nav-links a {
-    color: rgb(226, 226, 226);
+    justify-content: space-evenly;
+  }
+  
+  .nav-links a {
     text-decoration: none;
     font-weight: 600;
+    color: white;
     letter-spacing: 3px;
-    font-size: 18px;
-}
-
-.nav-links a:hover {
-    text-decoration: underline;
-}
+    font-size: 14px;
+  }
+  .nav-links a:hover {
+    color: #273043
+  }
+  .search {
+    overflow: auto;
+    border-radius: 5px;
+    padding-right: 100px;
+  }
+  
+  .search input[type="text"] {
+    border: 0px;
+    width: 400px;
+    padding: 10px 10px;
+  }
+  
+  .search input[type="text"]:focus {
+    outline: 0;
+  }
+  
+  .search input[type="submit"] {
+    border: 0px;
+    background: none;
+    background: linear-gradient(180deg, rgba(127,123,128,1) 0%, rgba(39,48,67,1) 100%);
+    color:white;
+    font-weight: 600;
+    float: right;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .login img {
+    height: 24px;
+    display: flex;
+    padding-right: 100px;
+  }
+  
+  /* End of the nav section */
 
 #signIn {
     font-weight: 400;

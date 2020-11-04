@@ -3,16 +3,32 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="description" content="IST 256 Course Project" />
+    <meta name="keywords" content="RainyDay" />
+    <meta name="author" content="Edwin Reyes Rodriguez" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="stylesheets/currentWeather.css" />
     <title>Current Weather</title>
 </head>
 
 <body>
-    <nav>
+    <!-- Start of the navigation -->
+    <nav class="nav-1">
         <div class="logo">
             <h1>RainyDay</h1>
         </div>
+        <div class="search">
+            <form class="search-form">
+                <input type="text" placeholder="Enter your location..." />
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div class="login">
+            <a href="./signInPage.html"><img src="images/img_568656.png" alt="login image" /></a>
+        </div>
+    </nav>
+
+    <nav class="nav-2">
         <ul class="nav-links">
             <li><a href="./index.html">Home</a></li>
             <li><a href="./currentWeather.html">Current Weather</a></li>
@@ -20,11 +36,11 @@
             <li><a href="./hourlyWeather.html">Hourly</a></li>
             <li><a href="./weeklyWeather.html">7-day</a></li>
             <li><a href="./aboutPage.html">About</a></li>
-            <li>
-                <a href="#"><img src="images/img_568656.png" alt="" class="login"></a>
-            </li>
         </ul>
     </nav>
+    <!-- End of the navigation -->
+
+    <!-- Start of the main section -->
     <main>
         <div class="container">
             <!-- These will be populated by the API, hard-coding it for now -->
@@ -41,6 +57,11 @@
             </div>
         </div>
     </main>
+
+
+    <!-- End of the main section -->
+
+    <link rel="stylesheet" href="javascripts/currentWeather.js" />
 </body>
 
 </html>
