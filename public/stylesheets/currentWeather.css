@@ -32,7 +32,7 @@
 .nav-links {
   display: flex;
   list-style: none;
-  justify-content: space-evenly;
+  justify-content: space-evenly
 }
 
 .nav-links a {
