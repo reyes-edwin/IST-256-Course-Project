@@ -2,6 +2,8 @@
 Style guide: https://www.w3schools.com/css/default.asp
 Imported font from google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+/* General Page Styling */
 * {
   margin: 0;
   padding: 0;
@@ -33,6 +35,7 @@ a {
 
 }
 
+/* Styling the Welcome/Get Location Box */
 main {
   display: flex;
   justify-content: center;
