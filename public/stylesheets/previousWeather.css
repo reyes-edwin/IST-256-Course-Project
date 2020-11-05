@@ -45,7 +45,11 @@
 }
 
 .nav-links a:hover {
+<<<<<<< HEAD
   color: #e6e49fff;
+=======
+    color: #e6e49fff;
+>>>>>>> 3049fb2db6846d2167b1508634afb342f1265543
 }
 
 .search {
