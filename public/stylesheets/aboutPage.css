@@ -22,8 +22,6 @@
 }
 
 .nav-2 {
-  display: flex;
-  justify-content: center;
   padding: 0.5rem;
   background: rgb(47, 57, 80);
 }
@@ -163,29 +161,3 @@ footer p {
   text-align: center;
 }
 /* End of footer */
-
-/* Start of media query */
-
-@media screen and (max-width: 1980px) {
-  .nav-links {
-    width: 50%;
-  }
-
-  .container {
-    margin: 10rem 35rem 0rem 35rem;
-    padding: 10px;
-    background: #e2e2e2;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    background: rgb(127, 123, 130);
-    background: linear-gradient(
-      180deg,
-      rgba(127, 123, 130, 1) 0%,
-      rgba(60, 60, 60, 1) 100%
-    );
-  }
-  .grids {
-    margin-top: 20%;
-  }
-}
-/* End of media query */

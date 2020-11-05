@@ -13,12 +13,13 @@ body {
 }
 /* Start of the nav section */
 .nav-1 {
-    display: flex;
-    justify-content: space-between;
-    background: #273043;
-    min-height: 8vh;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  background: #273043ff;
+  min-height: 8vh;
+  align-items: center;
+}
+
   .logo {
     text-transform: capitalize;
     color: white;
