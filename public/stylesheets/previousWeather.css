@@ -1,11 +1,14 @@
 /* Imported font from google fonts */
+
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Start of the nav section */
+
 .nav-1 {
   display: flex;
   justify-content: space-between;
@@ -40,9 +43,11 @@
   letter-spacing: 3px;
   font-size: 14px;
 }
+
 .nav-links a:hover {
-  color:#e6e49fff;
+  color: #e6e49fff;
 }
+
 .search {
   overflow: auto;
   border-radius: 5px;
@@ -73,6 +78,7 @@
 /* End of the nav section */
 
 /* Start of the main section */
+
 body {
   font-family: "Quicksand", sans-serif;
   height: 100vh;
@@ -83,6 +89,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .container {
   margin: auto;
   margin-top: 10%;
@@ -98,36 +105,44 @@ body {
     rgba(60, 60, 60, 1) 100%
   );
 }
+
 .weather {
   font-weight: 600;
   color: rgb(226, 226, 226);
   text-align: center;
 }
+
 .city {
   font-size: 20px;
   padding: 20px;
 }
+
 .temp {
   font-size: 64px;
   font-weight: 700;
   padding: 20px;
 }
+
 .condition {
   font-size: 20px;
   padding: 20px;
 }
+
 .rainy {
   height: 8rem;
   margin-left: 2rem;
   padding: 20px;
 }
+
 .current {
   display: flex;
   justify-content: space-evenly;
 }
+
 .current img {
   height: 2em;
 }
+
 .current p {
   display: flex;
   font-weight: 600;
@@ -135,13 +150,16 @@ body {
   align-items: center;
   color: rgb(226, 226, 226);
 }
+
 /* End of the main section */
 
 /* Start of media query */
+
 @media only screen and (min-width: 150px) and (max-width: 780px) {
   .search {
     width: 20%;
     margin: 0 auto;
   }
 }
+
 /* End of media query */

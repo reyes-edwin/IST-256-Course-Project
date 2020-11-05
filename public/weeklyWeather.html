@@ -8,92 +8,145 @@
   </head>
 
   <body>
+    <!-- Start of the navigation -->
     <nav class="nav-1">
-      <div class="logo">
-        <h1>RainyDay</h1>
-      </div>
-      <div class="search">
-        <form class="search-form">
-          <input type="text" placeholder="Enter your zip code..." />
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-      <div class="login">
-        <a href="./signInPage.html"
-          ><img src="images/img_568656.png" alt="login image"
-        /></a>
-      </div>
-    </nav>
-
-    <nav class="nav-2">
-      <ul class="nav-links">
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./currentWeather.html">Current Weather</a></li>
-        <li><a href="./previousWeather.html">Previous</a></li>
-        <li><a href="./hourlyWeather.html">Hourly</a></li>
-        <li><a href="./weeklyWeather.html">7-day</a></li>
-        <li><a href="./aboutPage.html">About</a></li>
-      </ul>
-    </nav>
+        <div class="logo">
+          <h1>RainyDay</h1>
+        </div>
+        <div class="search">
+          <form class="search-form">
+            <input type="text" placeholder="Enter your zip code..." />
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      </nav>
+  
+      <nav class="nav-2">
+        <ul class="nav-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./currentWeather.html">Current Weather</a></li>
+          <li><a href="./previousWeather.html">Previous</a></li>
+          <li><a href="./hourlyWeather.html">Hourly</a></li>
+          <li><a href="./weeklyWeather.html">7-day</a></li>
+          <li><a href="./aboutPage.html">About</a></li>
+        </ul>
+      </nav>
+      <!-- End of the navigation -->
     <main>
-      <div class="holder">
-        <div id="d1">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Fri Oct 30</h3>
-          <p>44&deg;F</p>
-          <p>36&deg;F</p>
-          <p>Light Rain</p>
-          <p>0.32"</p>
+        <div class="holder">
+            <div id="d1">
+                <div class="date">
+                    <h3>Fri Oct 30</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">6:09 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>44&deg;F/</h2>
+                    <h3>36&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Light Rain</h3>
+                </div>
+            </div>
+            <div id="d2">
+                <div class="date">
+                    <h3>Sat Oct 31</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:41 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">6:07 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>46&deg;F/</h2>
+                    <h3>36&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Clear</h3>
+                </div>
+            </div>
+            <div id="d3">
+                <div class="date">
+                    <h3>Sun Nov 1</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:42 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">6:06 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>49&deg;F/</h2>
+                    <h3>33&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Mostly Cloudy</h3>
+                </div>
+            </div>
+            <div id="d4">
+                <div class="date">
+                    <h3>Mon Nov 2</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:43 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:05 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>40&deg;F/</h2>
+                    <h3>32&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Mostly Cloudy</h3>
+                </div>
+            </div>
+            <div id="d5">
+                <div class="date">
+                    <h3>Tue Nov 3</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:44 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:04 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>54&deg;F/</h2>
+                    <h3>37&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Partly Cloudy</h3>
+                </div>
+            </div>
+            <div id="d6">
+                <div class="date">
+                    <h3>Wed Nov 4</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:46 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:03 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>67&deg;F/</h2>
+                    <h3>38&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Mostly Clear</h3>
+                </div>
+            </div>
+            <div id="d7">
+                <div class="date">
+                    <h3>Thu Nov 5</h3>
+                    <p>State College, PA</p>
+                </div>
+                <div class="rise">
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:47 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:02 pm</p>
+                </div>
+                <div class="weather">
+                    <h2>66&deg;F/</h2>
+                    <h3>44&deg;F</h3>
+                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <h3>Partly Cloudy</h3>
+                </div>
+            </div>
         </div>
-        <div id="d2">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Sat Oct 31</h3>
-          <p>46&deg;F</p>
-          <p>36&deg;F</p>
-          <p>Cloudy</p>
-          <p>0.0"</p>
-        </div>
-        <div id="d3">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Sun Nov 1</h3>
-          <p>49&deg;F</p>
-          <p>33&deg;F</p>
-          <p>Mostly Cloudy</p>
-          <p>0.12"</p>
-        </div>
-        <div id="d4">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Mon Nov 2</h3>
-          <p>40&deg;F</p>
-          <p>32&deg;F</p>
-          <p>Partly Cloudy</p>
-          <p>0.0"</p>
-        </div>
-        <div id="d5">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Tue Nov 3</h3>
-          <p>54&deg;F</p>
-          <p>37&deg;F</p>
-          <p>Clear</p>
-          <p>0.0"</p>
-        </div>
-        <div id="d6">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Wed Nov 4</h3>
-          <p>67&deg;F</p>
-          <p>37&deg;F</p>
-          <p>Mostly Clear</p>
-          <p>0.0"</p>
-        </div>
-        <div id="d7">
-          <!--Will likely add information on humidity and wind spead, these were just difficult to hard code in with accuracy-->
-          <h3>Thu Nov 5</h3>
-          <p>66&deg;F</p>
-          <p>44&deg;F</p>
-          <p>Partly Cloudy</p>
-          <p>0.0"</p>
-        </div>
-      </div>
     </main>
   </body>
 </html>

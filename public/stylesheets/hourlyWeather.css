@@ -1,0 +1,141 @@
+/* Imported font from google fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Start of the nav section */
+.nav-1 {
+  display: flex;
+  justify-content: space-between;
+  background: #273043ff;
+  min-height: 8vh;
+  align-items: center;
+}
+.logo {
+  text-transform: capitalize;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  padding-left: 100px;
+}
+
+.nav-2 {
+  padding: 0.5rem;
+  background: rgb(47, 57, 80);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 3px;
+  font-size: 14px;
+}
+.nav-links a:hover {
+  color: #e6e49fff;
+}
+.search {
+  overflow: auto;
+  border-radius: 5px;
+  padding-right: 100px;
+}
+
+.search input[type="text"] {
+  border: 0px;
+  width: 400px;
+  padding: 10px 10px;
+}
+
+.search input[type="text"]:focus {
+  outline: 0;
+}
+
+.search input[type="submit"] {
+  border: 0px;
+  background: none;
+  background-color: #e6e49fff;
+  color: #273043ff;
+  font-weight: 600;
+  float: right;
+  padding: 10px;
+  cursor: pointer;
+}
+/*End of the nav section  */
+
+.holder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  height: 100vh;
+  line-height: 1.4;
+  /* background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(135,206,250,1) 100%); */
+  background-image: url(../images/raindrop-3629132_960_720.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.holder > div {
+  margin: auto;
+  width: 15%;
+  margin-top: 10%;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: rgb(226, 226, 226);
+  color: rgb(226, 226, 226);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background: rgb(127, 123, 130);
+  background: linear-gradient(
+    180deg,
+    rgba(127, 123, 130, 1) 0%,
+    rgba(60, 60, 60, 1) 100%
+  );
+}
+
+h3 {
+  font-size: 20px;
+  padding: 5px;
+}
+
+h2 {
+  font-size: 32px;
+  padding: 5px;
+}
+
+.rise {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  align-items: center;
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main img {
+  width: 25%;
+}

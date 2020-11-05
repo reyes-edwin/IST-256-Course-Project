@@ -30,7 +30,7 @@
 .nav-links {
   display: flex;
   list-style: none;
-  justify-content: space-evenly;
+  justify-content: space-evenly
 }
 
 .nav-links a {
@@ -136,7 +136,6 @@ body {
 /* End of the main section */
 
 /* Media query to adjust screen resolution */
-
 @media only screen and (min-width: 150px) and (max-width: 780px) {
   .search {
     width: 20%;

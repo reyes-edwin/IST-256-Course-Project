@@ -1,11 +1,14 @@
 /* Imported font from google fonts */
+
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Start of the nav section */
+
 .nav-1 {
   display: flex;
   justify-content: space-between;
@@ -13,6 +16,7 @@
   min-height: 8vh;
   align-items: center;
 }
+
 .logo {
   text-transform: capitalize;
   color: white;
@@ -39,9 +43,11 @@
   letter-spacing: 3px;
   font-size: 14px;
 }
+
 .nav-links a:hover {
   color: #e6e49fff;
 }
+
 .search {
   overflow: auto;
   border-radius: 5px;
@@ -72,6 +78,7 @@
 /* End of the nav section */
 
 /* Start of the main section */
+
 body {
   font-family: "Quicksand", sans-serif;
   height: 100vh;
@@ -137,9 +144,11 @@ a {
   text-decoration: none;
   color: #e6e49fff;
 }
+
 /* End of the main section */
 
 /* Start of footer */
+
 footer {
   position: absolute;
   bottom: 0;
@@ -154,4 +163,5 @@ footer {
 footer p {
   text-align: center;
 }
+
 /* End of footer */
