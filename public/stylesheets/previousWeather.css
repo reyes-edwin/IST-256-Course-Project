@@ -64,15 +64,10 @@
   background: none;
   background-color: #e6e49fff;
   color: #273043ff;
+  font-weight: 600;
   float: right;
   padding: 10px;
   cursor: pointer;
-}
-
-.login img {
-  height: 24px;
-  display: flex;
-  padding-right: 100px;
 }
 
 /* End of the nav section */
