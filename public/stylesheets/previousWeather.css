@@ -1,147 +1,167 @@
 /* Imported font from google fonts */
+
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+
 /* Start of the nav section */
+
 .nav-1 {
-  display: flex;
-  justify-content: space-between;
-  background: #273043ff;
-  min-height: 8vh;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background: #273043ff;
+    min-height: 8vh;
+    align-items: center;
 }
 
 .logo {
-  text-transform: capitalize;
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
-  padding-left: 100px;
+    text-transform: capitalize;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 100px;
 }
 
 .nav-2 {
-  padding: 0.5rem;
-  background: rgb(47, 57, 80);
+    padding: 0.5rem;
+    background: rgb(47, 57, 80);
 }
 
 .nav-links {
-  display: flex;
-  list-style: none;
-  justify-content: space-evenly;
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
 }
 
 .nav-links a {
-  text-decoration: none;
-  font-weight: 600;
-  color: white;
-  letter-spacing: 3px;
-  font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 3px;
+    font-size: 14px;
 }
+
 .nav-links a:hover {
-  color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
+
 .search {
-  overflow: auto;
-  border-radius: 5px;
-  padding-right: 100px;
+    overflow: auto;
+    border-radius: 5px;
+    padding-right: 100px;
 }
 
 .search input[type="text"] {
-  border: 0px;
-  width: 400px;
-  padding: 10px 10px;
+    border: 0px;
+    width: 400px;
+    padding: 10px 10px;
 }
 
 .search input[type="text"]:focus {
-  outline: 0;
+    outline: 0;
 }
 
 .search input[type="submit"] {
-  border: 0px;
-  background: none;
-  background-color: #e6e49fff;
-  color: #273043ff;
-  font-weight: 600;
-  float: right;
-  padding: 10px;
-  cursor: pointer;
+    border: 0px;
+    background: none;
+    background-color: #e6e49fff;
+    color: #273043ff;
+    font-weight: 600;
+    float: right;
+    padding: 10px;
+    cursor: pointer;
 }
+
 
 /* End of the nav section */
 
+
 /* Start of the main section */
+
 body {
-  font-family: "Quicksand", sans-serif;
-  height: 100vh;
-  line-height: 1.4;
-  /* background: rgb(255,255,255);
+    font-family: "Quicksand", sans-serif;
+    height: 100vh;
+    line-height: 1.4;
+    /* background: rgb(255,255,255);
       background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(135,206,250,1) 100%); */
-  background-image: url(../images/raindrop-3629132_960_720.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-image: url(../images/raindrop-3629132_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 .container {
-  margin: auto;
-  margin-top: 10%;
-  width: 30%;
-  padding: 30px;
-  background: rgb(226, 226, 226);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  background: rgb(127, 123, 130);
-  background: linear-gradient(
-    180deg,
-    rgba(127, 123, 130, 1) 0%,
-    rgba(60, 60, 60, 1) 100%
-  );
+    margin: auto;
+    margin-top: 10%;
+    width: 30%;
+    padding: 30px;
+    background: rgb(226, 226, 226);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: rgb(127, 123, 130);
+    background: linear-gradient( 180deg, rgba(127, 123, 130, 1) 0%, rgba(60, 60, 60, 1) 100%);
 }
+
 .weather {
-  font-weight: 600;
-  color: rgb(226, 226, 226);
-  text-align: center;
+    font-weight: 600;
+    color: rgb(226, 226, 226);
+    text-align: center;
 }
+
 .city {
-  font-size: 20px;
-  padding: 20px;
+    font-size: 20px;
+    padding: 20px;
 }
+
 .temp {
-  font-size: 64px;
-  font-weight: 700;
-  padding: 20px;
+    font-size: 64px;
+    font-weight: 700;
+    padding: 20px;
 }
+
 .condition {
-  font-size: 20px;
-  padding: 20px;
+    font-size: 20px;
+    padding: 20px;
 }
+
 .rainy {
-  height: 8rem;
-  margin-left: 2rem;
-  padding: 20px;
+    height: 8rem;
+    margin-left: 2rem;
+    padding: 20px;
 }
+
 .current {
-  display: flex;
-  justify-content: space-evenly;
+    display: flex;
+    justify-content: space-evenly;
 }
+
 .current img {
-  height: 2em;
+    height: 2em;
 }
+
 .current p {
-  display: flex;
-  font-weight: 600;
-  font-size: 14px;
-  align-items: center;
-  color: rgb(226, 226, 226);
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    align-items: center;
+    color: rgb(226, 226, 226);
 }
+
+
 /* End of the main section */
 
+
 /* Start of media query */
+
 @media only screen and (min-width: 150px) and (max-width: 780px) {
-  .search {
-    width: 20%;
-    margin: 0 auto;
-  }
+    .search {
+        width: 20%;
+        margin: 0 auto;
+    }
 }
+
+
 /* End of media query */
