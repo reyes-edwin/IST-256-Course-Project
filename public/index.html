@@ -11,22 +11,22 @@
 </head>
 
 <body>
+  <!--Logo for landing page-->
   <div class="logo">
     <h1>RainyDay</h1>
   </div>
+  <!--Main section that holds welcome statement and area to either enter zip code or have location auto-detected (eventually via an api). -->
   <main>
     <div class="locationInfo">
       <h1>Welcome to RainyDay!</h1>
-      <p>Provide your location below or sign in to start:</p>
-      <form id="cityInput"> <!--TODO: Eventually add an action to this-->
-        <input type="text" id="cityName" placeholder="Enter your city!" name="cityName">
+      <p>Provide your location below to begin:</p>
+      <form id="zipCodeForm" method="GET" action="./currentWeather.html"> <!--Eventually this will be a POST method to read location into CurrentW-->
+        <input type="text" id="zipCode" placeholder="Please enter your zip code..." name="zipCode">
         <br>
-        <button type="submit" class="locationOption"><a href="CurrentWeather.html">Submit</a></button> <!--Just doing it this way until I have a way to link the submit action to CurrentWeather.html in JavaScript-->
+        <button type="submit" class="submitLocation">Submit</button> 
         <label> OR </label>
-        <button class="locationOption"><a href="CurrentWeather.html">Auto-detect Location</a></button>
+        <button class="submitLocation">Auto-detect Location</button>
       </form>
-      <br>
-      <button id="signIn" class="locationOption" >Sign in with Google!</button>
     </div>
   </main>
 </body>
