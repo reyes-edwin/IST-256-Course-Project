@@ -39,6 +39,7 @@ document
     );
   });
 
+//   Allows only one submission. 
 $("form").submit(function () {
   $("input[type=submit]", this).attr("disabled", "disabled");
 });
