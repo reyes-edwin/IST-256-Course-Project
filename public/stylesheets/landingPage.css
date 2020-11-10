@@ -16,6 +16,8 @@ body {
   font-family: 'Quicksand', sans-serif;
   background-image: linear-gradient(to bottom,  #87cefaff, #87cefaff, #e6e49fff);
   text-align: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 a {
