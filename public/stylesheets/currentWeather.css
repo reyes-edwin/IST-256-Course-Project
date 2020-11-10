@@ -10,7 +10,7 @@
 .nav-1 {
   display: flex;
   justify-content: space-between;
-  background: #273043ff;
+  background: #273043;
   min-height: 8vh;
   align-items: center;
 }
@@ -24,7 +24,7 @@
 
 .nav-2 {
   padding: 0.5rem;
-  background: rgb(47, 57, 80);
+  background: hsl(222, 26%, 25%);
 }
 
 .nav-links {
@@ -77,11 +77,11 @@ body {
   font-family: "Quicksand", sans-serif;
   height: 100vh;
   line-height: 1.4;
-  background-image: url(../images/raindrop-3629132_960_720.jpg);
+  background-image: url(../images/rain.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
-.container {
+#container {
   margin: auto;
   margin-top: 10%;
   width: 30%;
@@ -93,7 +93,7 @@ body {
   background: linear-gradient(
     180deg,
     rgba(127, 123, 130, 1) 0%,
-    rgba(60, 60, 60, 1) 100%
+    #3c3c3c 100%
   );
 }
 .weather {
@@ -115,7 +115,6 @@ body {
   padding: 20px;
 }
 .rainy {
-  height: 8rem;
   margin-left: 2rem;
   padding: 20px;
 }
