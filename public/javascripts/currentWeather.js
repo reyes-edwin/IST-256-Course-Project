@@ -16,6 +16,7 @@ document
         ",us&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a",
       function (data) {
         console.log(data);
+        console.log("User entered: " +nameInput.value);
         // selecting the icon form the API
         let icon =
           "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
