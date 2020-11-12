@@ -20,8 +20,8 @@ document
         let lat = data.coord.lat;
         let lon = data.coord.lon;
 
-        // Retrieving the previous date
         var prev_date = new Date();
+        // Retrieving the previous date
         prev_date.setDate(prev_date.getDate() - 1);
 
         prev_date.toDateString();
