@@ -25,8 +25,8 @@
     <div class="locationInfo">
       <h1>Welcome to RainyDay!</h1>
       <p>Provide your location below to begin:</p>
-      <form id="zipCodeForm" method="POST" action="./currentWeather.html"> <!--Eventually this will be a POST method to read location into currentWeather.html to set up weather display.-->
-        <input type="text" id="zipCode" placeholder="Please enter your zip code..." name="zipCode" minlength="5" maxlength="5" pattern="^\d{5}$" title="Exactly 5 digits" required>
+      <form id="zipCodeForm" method="GET" action="./currentWeather.html"> <!--Eventually this will be a POST method to read location into currentWeather.html to set up weather display.-->
+        <input type="text" id="zipCode" placeholder="Please enter your zip code..." name="zipCode" minlength="5" maxlength="5" pattern="^\d{5}$" title="Exactly 5 digits (e.g.: 12345)" required>
         <br>
         <button type="submit" class="submitLocation">Submit</button> 
         <label> OR </label>
