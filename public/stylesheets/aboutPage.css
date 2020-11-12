@@ -48,32 +48,6 @@
   color: #e6e49fff;
 }
 
-.search {
-  overflow: auto;
-  border-radius: 5px;
-  padding-right: 100px;
-}
-
-.search input[type="text"] {
-  border: 0px;
-  width: 400px;
-  padding: 10px 10px;
-}
-
-.search input[type="text"]:focus {
-  outline: 0;
-}
-
-.search input[type="submit"] {
-  border: 0px;
-  background: none;
-  background-color: #e6e49fff;
-  color: #273043ff;
-  font-weight: 600;
-  float: right;
-  padding: 10px;
-  cursor: pointer;
-}
 
 /* End of the nav section */
 

@@ -10,7 +10,7 @@
 .nav-1 {
   display: flex;
   justify-content: space-between;
-  background: #273043ff;
+  background: #273043;
   min-height: 8vh;
   align-items: center;
 }
@@ -24,7 +24,7 @@
 
 .nav-2 {
   padding: 0.5rem;
-  background: rgb(47, 57, 80);
+  background: hsl(222, 26%, 25%);
 }
 
 .nav-links {
@@ -41,7 +41,7 @@
   font-size: 14px;
 }
 .nav-links a:hover {
-  color: #e6e49fff;
+  color: #e6e49f;
 }
 .search {
   overflow: auto;
@@ -77,24 +77,18 @@ body {
   font-family: "Quicksand", sans-serif;
   height: 100vh;
   line-height: 1.4;
-  background-image: url(../images/raindrop-3629132_960_720.jpg);
+  background: linear-gradient(0deg, rgba(230,228,159,1) 0%, rgba(39,48,67,1) 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
-.container {
+#container {
   margin: auto;
   margin-top: 10%;
   width: 30%;
   padding: 30px;
-  background: rgb(226, 226, 226);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  background: rgb(127, 123, 130);
-  background: linear-gradient(
-    180deg,
-    rgba(127, 123, 130, 1) 0%,
-    rgba(60, 60, 60, 1) 100%
-  );
+  background: #273043;
 }
 .weather {
   font-weight: 600;
@@ -115,7 +109,6 @@ body {
   padding: 20px;
 }
 .rainy {
-  height: 8rem;
   margin-left: 2rem;
   padding: 20px;
 }
