@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="javascripts/weeklyWeather.js" defer></script>
     <link rel="stylesheet" href="stylesheets/weeklyWeather.css">
     <title>7 Day Weather</title>
 </head>
@@ -42,14 +44,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">7:39 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">6:09 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>44&deg;F/</h2>
                     <h3>36&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon1" alt="">
                     <h3>Light Rain</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
             <div id="d2">
@@ -58,14 +63,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:41 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">6:07 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>46&deg;F/</h2>
                     <h3>36&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon2" alt="">
                     <h3>Clear</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
             <div id="d3">
@@ -74,14 +82,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:42 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">6:06 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>49&deg;F/</h2>
                     <h3>33&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon3" alt="">
                     <h3>Mostly Cloudy</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
             <div id="d4">
@@ -90,14 +101,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:43 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:05 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>40&deg;F/</h2>
                     <h3>32&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon4" alt="">
                     <h3>Mostly Cloudy</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
             <div id="d5">
@@ -106,14 +120,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:44 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:04 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>54&deg;F/</h2>
                     <h3>37&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon5" alt="">
                     <h3>Partly Cloudy</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
             <div id="d6">
@@ -122,14 +139,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:46 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:03 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>67&deg;F/</h2>
                     <h3>38&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon6" alt="">
                     <h3>Mostly Clear</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
             <div id="d7">
@@ -138,14 +158,17 @@
                     <p>State College, PA</p>
                 </div>
                 <div class="rise">
-                    <p><img src="images/ios11-weather-sunrise-icon.png" alt="">6:47 am</p>
-                    <p><img src="images/ios11-weather-sunset-icon.png" alt="">5:02 pm</p>
+                    <p><img src="images/ios11-weather-sunrise-icon.png" alt=""> 7:39 am</p>
+                    <p><img src="images/ios11-weather-sunset-icon.png" alt=""> 6:09 pm</p>
+                    <p><img src="images/ios11-weather-wind-icon.png" alt=""> 0 mph</p>
                 </div>
                 <div class="weather">
                     <h2>66&deg;F/</h2>
                     <h3>44&deg;F</h3>
-                    <img src="images/ios11-weather-rain-icon.png" alt="">
+                    <img src="images/ios11-weather-rain-icon.png" id="icon7" alt="">
                     <h3>Partly Cloudy</h3>
+                    <p>Rain: 0%</p>
+                    <p>Humidity: 12%</p>
                 </div>
             </div>
         </div>

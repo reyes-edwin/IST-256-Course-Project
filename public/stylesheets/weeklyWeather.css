@@ -126,8 +126,9 @@ h2 {
 
 .rise {
     padding: 5px;
-    display: flex;
     justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
     font-size: 14px;
     align-items: center;
 }
@@ -139,5 +140,5 @@ h2 {
 }
 
 main img {
-    width: 25%;
+    width: 15%;
 }
