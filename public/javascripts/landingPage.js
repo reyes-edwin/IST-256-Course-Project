@@ -3,6 +3,25 @@ window.addEventListener("DOMContentLoaded", function(event){
 
 });
 
+var lat = null;
+var long = null; 
+function setLocation(){
+  if (typeof(Storage) !== "undefined") {
+    // Store
+    console.log(lat + "*" + long);
+    if((lat != null) && (long != null)){
+      console.log(lat + "*" + long);
+      sessionStorage.setItem("lat", lat);
+      sessionStorage.setItem("long", long);
+      alert(sessionStorage.getItem("lat"));
+    } else {
+      alert("Lat or long have not been read");
+    }
+  } else {
+    alert("Sorry, your browser does not support Web Storage...");
+  }
+}
+
 // var autoLocation = document.getElementById("detectLocation");
 
 function getLocation() {
@@ -17,8 +36,14 @@ function getLocation() {
 function showPosition(position) {
 //   autoLocation.innerHTML = "Latitude: " + position.coords.latitude + 
 //   "<br>Longitude: " + position.coords.longitude;
-    alert("Latitude: " + position.coords.latitude + 
-    "\nLongitude: " + position.coords.longitude);
+
+ // let location = {lat: position.coords.latitude, long:  position.coords.longitude};
+  lat =  position.coords.latitude;
+  long = position.coords.longitude;
+  console.log("Latitude: " + lat + 
+    "\nLongitude: " + long);
+  // console.log("location inside showPos: " + location);
+  // return location;
 }
 
 //TODO: Add in error handling
