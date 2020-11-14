@@ -3,50 +3,41 @@ window.addEventListener("DOMContentLoaded", function(event){
 
 });
 
-var lat = null;
-var long = null; 
-function setLocation(){
-  if (typeof(Storage) !== "undefined") {
-    // Store
-    console.log(lat + "*" + long);
-    if((lat != null) && (long != null)){
-      console.log(lat + "*" + long);
-      sessionStorage.setItem("lat", lat);
-      sessionStorage.setItem("long", long);
-      alert(sessionStorage.getItem("lat"));
-    } else {
-      alert("Lat or long have not been read");
-    }
-  } else {
-    alert("Sorry, your browser does not support Web Storage...");
-  }
-}
+//TODO: Test session storage 
+//TODO: submit buttons to currentWeather.html
 
-// var autoLocation = document.getElementById("detectLocation");
+//TODO: Set up check against API for valid zip code/coords
+
 
 function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else { 
-    // autoLocation.innerHTML = "Geolocation is not supported by this browser.";
-    alert("Geolocation is not supported by this browser.");
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(setLocation, showError);
+    } else { 
+      // autoLocation.innerHTML = "Geolocation is not supported by this browser.";
+      alert("Geolocation is not supported by this browser.");
+    }
   }
-}
 
-function showPosition(position) {
-//   autoLocation.innerHTML = "Latitude: " + position.coords.latitude + 
-//   "<br>Longitude: " + position.coords.longitude;
+  function setLocation(position){
+    let lat =  position.coords.latitude;
+    let long = position.coords.longitude;
 
- // let location = {lat: position.coords.latitude, long:  position.coords.longitude};
-  lat =  position.coords.latitude;
-  long = position.coords.longitude;
-  console.log("Latitude: " + lat + 
-    "\nLongitude: " + long);
-  // console.log("location inside showPos: " + location);
-  // return location;
-}
+    if (typeof(Storage) !== "undefined") {
+      if((lat != null) && (long != null)){
+        sessionStorage.setItem("lat", lat);
+        sessionStorage.setItem("long", long);
 
-//TODO: Add in error handling
+        //Used to Test Lat/Long
+        let loc1 = sessionStorage.getItem("lat");
+        let loc2 = sessionStorage.getItem("long");
+        alert('Lat: ' + loc1 + " Long: " + loc2);
+      }
+    } else {
+          alert("Sorry, your browser does not support Web Storage...");
+    }
+
+  }
+
 
 function showError(error) {
   switch(error.code) {
