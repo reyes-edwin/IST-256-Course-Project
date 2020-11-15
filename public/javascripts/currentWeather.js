@@ -1,5 +1,9 @@
 // Ensure the JS code is loaded before running
-$(document).ready(function () {});
+$(document).ready(function () {
+  let loc1 = sessionStorage.getItem("lat");
+  let loc2 = sessionStorage.getItem("long");
+  alert('Latitude: ' + loc1 + " Long: " + loc2);
+});
 
 // Want to get the text input
 const nameInput = document.getElementById("input");
