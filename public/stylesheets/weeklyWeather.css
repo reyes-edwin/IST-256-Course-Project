@@ -140,5 +140,9 @@ h2 {
 }
 
 main img {
+    width: 35%;
+}
+
+p img {
     width: 15%;
 }
