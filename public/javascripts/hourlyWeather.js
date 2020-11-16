@@ -115,7 +115,7 @@ const nightIconList = {
 
 $.ajax({
     method: 'GET',
-    url: 'https://api.openweathermap.org/data/2.5/weather?q=state college&appid=c0c35b925bbddaaf1dca134adf31f13a',
+    url: 'https://api.openweathermap.org/data/2.5/weather?zip=16802&appid=c0c35b925bbddaaf1dca134adf31f13a',
     success: function(data) {
         runAPI(data);
     }
