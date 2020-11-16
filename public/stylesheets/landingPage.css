@@ -2,6 +2,8 @@
 Style guide: https://www.w3schools.com/css/default.asp
 Imported font from google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+/* General Page Styling */
 * {
   margin: 0;
   padding: 0;
@@ -12,8 +14,10 @@ Imported font from google fonts */
 body {
   color: #e6e49fff;
   font-family: 'Quicksand', sans-serif;
-  background-image: linear-gradient(to bottom, #273043ff, #7f7b82ff);
+  background-image: linear-gradient(to bottom,  #87cefaff, #87cefaff, #e6e49fff);
   text-align: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 a {
@@ -28,9 +32,12 @@ a {
   font: 18px;
   font-weight: 700;
   text-align: left;
-  padding: 1rem 0rem;
+  margin-top: .5rem;
+  margin-left: 100px;
+
 }
 
+/* Styling the Welcome/Get Location Box */
 main {
   display: flex;
   justify-content: center;
@@ -46,47 +53,48 @@ main {
   font-weight: 400;
   width: auto;
   height: auto;
-  padding: 2em;
+  padding: 5rem;
+  margin: .5rem;
+  letter-spacing: 1px;
+}
+
+.locationInfo h1 {
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 
-
-#cityInput {
+#zipCodeForm {
   display: inline;
-  color: #87cefaff;
+  color: white;
 }
 
-.locationOption {
+.submitLocation {
   padding: 10px 24px;
-  background-image: linear-gradient(to bottom, #273043ff, #e6e49fff);
+  margin: .5rem;
+  background-color: #7f7b82ff;
   color: whitesmoke;
   border-radius: 8px;
   border-style: none;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
   font: 18pt;
   text-decoration: none;
+
 }
 
-#cityInput > #cityName {
+.submitLocation:hover{
+  background-color: #273043ff;
+}
+
+#zipCodeForm > #zipCode {
   text-align: center;
   padding: 8px 10px;
   margin: 1rem;
   border-radius: 6px;
   box-sizing: border-box;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  width: 310;
 }
 
-#cityInput > button {
-  margin: .5rem;
-}
-
-.locationInfo > p {
-  margin: .5rem;
-}
-
-#signIn {
-  background-image: none;
-  background-color: rgba(255, 255, 255, .8);
-  box-shadow: 0px 0px 7px #87cefaff;
-  color: #273043ff;
-  margin-top: 2rem;
-}

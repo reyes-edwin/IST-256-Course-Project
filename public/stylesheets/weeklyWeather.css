@@ -7,10 +7,13 @@
     box-sizing: border-box;
 }
 
+
+/* Start of the nav section */
+
 .nav-1 {
     display: flex;
     justify-content: space-between;
-    background: #7f7b82ff;
+    background: #273043ff;
     min-height: 8vh;
     align-items: center;
 }
@@ -25,7 +28,7 @@
 
 .nav-2 {
     padding: 0.5rem;
-    background: rgb(139, 135, 143);
+    background: rgb(47, 57, 80);
 }
 
 .nav-links {
@@ -43,7 +46,7 @@
 }
 
 .nav-links a:hover {
-    color: rgb(0, 0, 0);
+    color: #e6e49fff;
 }
 
 .search {
@@ -65,18 +68,16 @@
 .search input[type="submit"] {
     border: 0px;
     background: none;
-    background-color: rgb(0, 0, 0);
-    color: #fff;
+    background-color: #e6e49fff;
+    color: #273043ff;
+    font-weight: 600;
     float: right;
     padding: 10px;
     cursor: pointer;
 }
 
-.login img {
-    height: 24px;
-    display: flex;
-    padding-right: 100px;
-}
+
+/* End of nav */
 
 .holder {
     display: flex;
@@ -126,9 +127,8 @@ h2 {
 
 .rise {
     padding: 5px;
-    justify-content: space-between;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     font-size: 14px;
     align-items: center;
 }
