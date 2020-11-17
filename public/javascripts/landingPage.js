@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", function(event){
 
 });
 
-// var autoLocation = document.getElementById("detectLocation");
+var autoLocation = document.getElementById("detectLocation");
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -21,7 +21,7 @@ function showPosition(position) {
     "\nLongitude: " + position.coords.longitude);
 }
 
-//TODO: Add in error handling
+// TODO: Add in error handling
 
 function showError(error) {
   switch(error.code) {

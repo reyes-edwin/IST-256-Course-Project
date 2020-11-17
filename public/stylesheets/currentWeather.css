@@ -126,6 +126,10 @@ body {
   align-items: center;
   color: rgb(226, 226, 226);
 }
+
+#icon {
+  height: 150px;;
+}
 /* End of the main section */
 
 /* Media query to adjust screen resolution */
