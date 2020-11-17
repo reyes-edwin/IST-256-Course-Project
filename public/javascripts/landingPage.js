@@ -1,30 +1,72 @@
-window.addEventListener("DOMContentLoaded", function(event){
-    console.log("Document up.");
-
+$(document).ready(function(){
+  //testAPICall();
 });
 
-// var autoLocation = document.getElementById("detectLocation");
+//  API Testing
+// function testAPICall(){
+//   $.ajax({
+//     method: 'GET',
+//     url: '/api',
+//     success: function(data){
+//       console.log(data);
+//     }
+//   });
+// }
 
-function getLocation() {
+
+
+
+$("#detectLocation").click(submitDetectedLocation);
+
+function submitDetectedLocation() {
+  console.log("submit button");
+  getAutoLocation();
+  $(location).attr("href", "currentWeather.html");
+}
+
+$("#zipCodeForm").submit(submitProvidedLocation);
+
+function submitProvidedLocation() {
+  let zipCode = $("#zipCode").val();
+  if(verifyZipCode(zipCode)){
+    setZipCode(zipCode);
+  } else{
+    setZipCode(null);
+    event.preventDefault();
+    alert("Sorry, it appears this zip code's weather data is unavailable.\nPlease enter a new zip code!");
+  }
+}
+
+function getAutoLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else { 
-    // autoLocation.innerHTML = "Geolocation is not supported by this browser.";
+    navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
+  } else {
     alert("Geolocation is not supported by this browser.");
   }
 }
 
-function showPosition(position) {
-//   autoLocation.innerHTML = "Latitude: " + position.coords.latitude + 
-//   "<br>Longitude: " + position.coords.longitude;
-    alert("Latitude: " + position.coords.latitude + 
-    "\nLongitude: " + position.coords.longitude);
+function setCoords(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+
+  if (typeof Storage !== "undefined") {
+    if (lat != null && lon != null) {
+      sessionStorage.setItem("lat", lat);
+      sessionStorage.setItem("lon", lon);
+      sessionStorage.setItem("zipCode", "undetected");
+
+      //Used to Test Lat/Lon
+      let loc1 = sessionStorage.getItem("lat");
+      let loc2 = sessionStorage.getItem("lon");
+      alert("Lat: " + loc1 + " Lon: " + loc2);
+    }
+  } else {
+    alert("Sorry, your browser does not support Web Storage...");
+  }
 }
 
-//TODO: Add in error handling
-
-function showError(error) {
-  switch(error.code) {
+function showAutoLocError(error) {
+  switch (error.code) {
     case error.PERMISSION_DENIED:
       alert("User denied the request for Geolocation.");
       break;
@@ -37,5 +79,62 @@ function showError(error) {
     case error.UNKNOWN_ERROR:
       alert("An unknown error occurred.");
       break;
+  }
+}
+
+
+
+
+function setZipCode(zipCode) {
+  if (typeof Storage !== "undefined") {
+    sessionStorage.setItem("zipCode", zipCode);
+    if(zipCode != null){
+      setCoordsFromZip(zipCode);
+    }
+  } else {
+    alert("Sorry, your browser does not support Web Storage...");
+  }
+}
+
+function verifyZipCode(zipCode) {
+  let isValid = false;
+  apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+  if (zipCode != null && zipCode >= 0) {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
+        console.log(data);
+        isValid = true;
+      }, 
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+        isValid = false;
+      }
+    });
+  } 
+  else{
+    isValid = false;
+  }
+  return isValid;
+}
+
+function setCoordsFromZip(zipCode){
+  if(zipCode != null){
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      success: function(data) {
+        sessionStorage.setItem("lat", data.coord.lat);
+        sessionStorage.setItem("lon", data.coord.lon);
+      },
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+      }
+    });
   }
 }
