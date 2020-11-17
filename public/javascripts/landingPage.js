@@ -68,6 +68,7 @@ function setCoords(position) {
       sessionStorage.setItem("lat", lat);
       sessionStorage.setItem("lon", lon);
       sessionStorage.setItem("zipCode", "undetected");
+      setName(lat, lon);
 
       //Used to Test Lat/Lon
       let loc1 = sessionStorage.getItem("lat");
@@ -115,7 +116,7 @@ function setZipCode(zipCode) {
 
 function verifyZipCode(zipCode) {
   let isValid = false;
-  apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
 
   if (zipCode != null && zipCode >= 0) {
     $.ajax({
@@ -140,13 +141,35 @@ function verifyZipCode(zipCode) {
 }
 
 function setCoordsFromZip(zipCode){
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
   if(zipCode != null){
     $.ajax({
       method: 'GET',
       url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      async: false,
       success: function(data) {
         sessionStorage.setItem("lat", data.coord.lat);
         sessionStorage.setItem("lon", data.coord.lon);
+        sessionStorage.setItem("cityName", data.name);
+      },
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+      }
+    });
+  }
+}
+
+function setName(lat, lon){
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+  if(lat != null && lon != null){
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
         sessionStorage.setItem("cityName", data.name);
       },
       error: function(xhr, status, error) {
