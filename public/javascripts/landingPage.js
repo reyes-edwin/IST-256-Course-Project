@@ -1,6 +1,6 @@
 $(document).ready(function(){
   //testAPICall();
-  getLocation();
+  // getLocation();
 });
 
 //  API Testing
@@ -15,20 +15,18 @@ $(document).ready(function(){
 // }
 
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    alert("Geoloc not supported");
-  }
-}
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     alert("Geoloc not supported");
+//   }
+// }
 
-function showPosition(position) {
-  alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
-}
-
-
-///////////////////
+// function showPosition(position) {
+//   alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+// }
+//////////////
 
 $("#detectLocation").click(submitDetectedLocation);
 
@@ -68,13 +66,14 @@ function setCoords(position) {
       sessionStorage.setItem("lat", lat);
       sessionStorage.setItem("lon", lon);
       sessionStorage.setItem("zipCode", "undetected");
+      setName(lat, lon);
 
-      //Used to Test Lat/Lon
-      let loc1 = sessionStorage.getItem("lat");
-      let loc2 = sessionStorage.getItem("lon");
-      alert("Lat: " + loc1 + " Lon: " + loc2);
+    //Used to Test Lat/Lon
+      // let loc1 = sessionStorage.getItem("lat");
+      // let loc2 = sessionStorage.getItem("lon");
+      // alert("Lat: " + loc1 + " Lon: " + loc2);
     } else{
-      alert("coords registered as null");
+      console.log("Error: The coordinates were registered as null.");
       
     }
   } else {
@@ -85,13 +84,13 @@ function setCoords(position) {
 function showAutoLocError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
-      alert("User denied the request for Geolocation.");
+      alert("Please change your browser's permissions to allow for automatic location detection.");
       break;
     case error.POSITION_UNAVAILABLE:
       alert("Location information is unavailable.");
       break;
     case error.TIMEOUT:
-      alert("The request to get user location timed out.");
+      alert("The request to get your location timed out. Please");
       break;
     case error.UNKNOWN_ERROR:
       alert("An unknown error occurred.");
@@ -115,7 +114,7 @@ function setZipCode(zipCode) {
 
 function verifyZipCode(zipCode) {
   let isValid = false;
-  apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
 
   if (zipCode != null && zipCode >= 0) {
     $.ajax({
@@ -140,13 +139,35 @@ function verifyZipCode(zipCode) {
 }
 
 function setCoordsFromZip(zipCode){
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
   if(zipCode != null){
     $.ajax({
       method: 'GET',
       url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      async: false,
       success: function(data) {
         sessionStorage.setItem("lat", data.coord.lat);
         sessionStorage.setItem("lon", data.coord.lon);
+        sessionStorage.setItem("cityName", data.name);
+      },
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+      }
+    });
+  }
+}
+
+function setName(lat, lon){
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+  if(lat != null && lon != null){
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
         sessionStorage.setItem("cityName", data.name);
       },
       error: function(xhr, status, error) {
