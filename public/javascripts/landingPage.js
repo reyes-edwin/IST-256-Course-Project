@@ -1,5 +1,6 @@
 $(document).ready(function(){
   //testAPICall();
+  getLocation();
 });
 
 //  API Testing
@@ -14,12 +15,24 @@ $(document).ready(function(){
 // }
 
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
 
+function showPosition(position) {
+  alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+}
+
+
+///////////////////
 
 $("#detectLocation").click(submitDetectedLocation);
 
 function submitDetectedLocation() {
-  console.log("submit button");
   getAutoLocation();
   $(location).attr("href", "currentWeather.html");
 }
@@ -51,6 +64,7 @@ function setCoords(position) {
 
   if (typeof Storage !== "undefined") {
     if (lat != null && lon != null) {
+      console.log("Hello");
       sessionStorage.setItem("lat", lat);
       sessionStorage.setItem("lon", lon);
       sessionStorage.setItem("zipCode", "undetected");
@@ -59,6 +73,9 @@ function setCoords(position) {
       let loc1 = sessionStorage.getItem("lat");
       let loc2 = sessionStorage.getItem("lon");
       alert("Lat: " + loc1 + " Lon: " + loc2);
+    } else{
+      alert("coords registered as null");
+      
     }
   } else {
     alert("Sorry, your browser does not support Web Storage...");
@@ -130,6 +147,7 @@ function setCoordsFromZip(zipCode){
       success: function(data) {
         sessionStorage.setItem("lat", data.coord.lat);
         sessionStorage.setItem("lon", data.coord.lon);
+        sessionStorage.setItem("cityName", data.name);
       },
       error: function(xhr, status, error) {
         var errorMessage = xhr.status + ': ' + xhr.statusText;
