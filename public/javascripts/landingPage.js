@@ -1,9 +1,8 @@
 $(document).ready(function(){
-  console.log("Document up.");
   //testAPICall();
 });
 
-//API Testing
+//  API Testing
 // function testAPICall(){
 //   $.ajax({
 //     method: 'GET',
@@ -16,34 +15,37 @@ $(document).ready(function(){
 
 
 
+
 $("#detectLocation").click(submitDetectedLocation);
 
 function submitDetectedLocation() {
   console.log("submit button");
-  getLocation();
+  getAutoLocation();
   $(location).attr("href", "currentWeather.html");
 }
 
 $("#zipCodeForm").submit(submitProvidedLocation);
 
 function submitProvidedLocation() {
-  console.log("hello");
-  inputLocation();
-  console.log("made it");
+  let zipCode = $("#zipCode").val();
+  if(verifyZipCode(zipCode)){
+    setZipCode(zipCode);
+  } else{
+    setZipCode(null);
+    event.preventDefault();
+    alert("Sorry, it appears this zip code's weather data is unavailable.\nPlease enter a new zip code!");
+  }
 }
 
-//TODO: Set up check against API for valid zip code/coords
-
-function getLocation() {
+function getAutoLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(setLocation, showError);
+    navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
   } else {
-    // autoLocation.innerHTML = "Geolocation is not supported by this browser.";
     alert("Geolocation is not supported by this browser.");
   }
 }
 
-function setLocation(position) {
+function setCoords(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
@@ -51,7 +53,7 @@ function setLocation(position) {
     if (lat != null && lon != null) {
       sessionStorage.setItem("lat", lat);
       sessionStorage.setItem("lon", lon);
-      sessionStorage.setItem("zipCode", "");
+      sessionStorage.setItem("zipCode", "undetected");
 
       //Used to Test Lat/Lon
       let loc1 = sessionStorage.getItem("lat");
@@ -63,7 +65,7 @@ function setLocation(position) {
   }
 }
 
-function showError(error) {
+function showAutoLocError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
       alert("User denied the request for Geolocation.");
@@ -80,19 +82,14 @@ function showError(error) {
   }
 }
 
-function inputLocation() {
-  let zipCode = $("#zipCode").val();
-  console.log(zipCode);
 
+
+
+function setZipCode(zipCode) {
   if (typeof Storage !== "undefined") {
-    if (zipCode != null) {
-      sessionStorage.setItem("zipCode", zipCode);
-      sessionStorage.setItem("lat", "");
-      sessionStorage.setItem("lon", "");
-
-      //Used to Test Lat/Long
-      let loc1 = sessionStorage.getItem("zipCode");
-      alert("Zip: " + loc1);
+    sessionStorage.setItem("zipCode", zipCode);
+    if(zipCode != null){
+      setCoordsFromZip(zipCode);
     }
   } else {
     alert("Sorry, your browser does not support Web Storage...");
@@ -100,7 +97,44 @@ function inputLocation() {
 }
 
 function verifyZipCode(zipCode) {
-  var isValid = false;
+  let isValid = false;
+  apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
 
+  if (zipCode != null && zipCode >= 0) {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
+        console.log(data);
+        isValid = true;
+      }, 
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+        isValid = false;
+      }
+    });
+  } 
+  else{
+    isValid = false;
+  }
   return isValid;
+}
+
+function setCoordsFromZip(zipCode){
+  if(zipCode != null){
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      success: function(data) {
+        sessionStorage.setItem("lat", data.coord.lat);
+        sessionStorage.setItem("lon", data.coord.lon);
+      },
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+      }
+    });
+  }
 }
