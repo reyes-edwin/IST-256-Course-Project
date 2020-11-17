@@ -113,41 +113,48 @@ const nightIconList = {
     804: '/images/night-icons/ios11-weather-cloudy-icon.png'
 };
 
-$.ajax({
-    method: 'GET',
-    url: 'https://api.openweathermap.org/data/2.5/weather?zip=16802&appid=c0c35b925bbddaaf1dca134adf31f13a',
-    success: function(data) {
-        runAPI(data);
-    }
+$(document).ready(function() {
+    runAPI();
 });
 
-function runAPI(obj) {
-    var lat = obj.coord.lat;
-    var lon = obj.coord.lon;
-    var cityName = obj.name;
+function runAPI() {
     $.ajax({
         method: 'GET',
-        url: 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a',
+        url: 'https://api.openweathermap.org/data/2.5/onecall?lat=' + sessionStorage.getItem("lat") + '&lon=' + sessionStorage.getItem("lon") + '&exclude=minutely,alerts&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a',
         success: function(data) {
-            populateWeather(data, cityName);
+            populateWeather(data);
         }
     });
 }
 
 
-function populateWeather(obj, cityName) {
+function populateWeather(obj) {
     for (var i = 0; i < 7; i++) {
         var dId = "#d" + (i + 1);
         var iId = "#icon" + (i + 1);
         var today = obj.daily[i];
         var nData = [];
 
-        console.log(obj.current);
-
         $(iId).attr("src", changeIcon(today.weather[0].id, today.weather[0].icon.substring(2)));
 
+
+        if (today.weather[0].main === "Clear") {
+            $(dId).css("background", "#6691BB");
+        } else if (today.weather[0].main === "Rain") {
+            $(dId).css("background", "linear-gradient(180deg, rgba(127, 123, 130, 1) 0%, #3c3c3c 100%");
+        } else if (today.weather[0].main === "Clouds") {
+            $(dId).css("background", "#465367");
+        } else if (today.weather[0].main === "Thunderstorm") {
+            $(dId).css("background", "#78777F");
+        } else if (today.weather[0].main === "Snow") {
+            $(dId).css("background", "#759AAC");
+        } else if (today.weather[0].main === "Fog" || today.weather[0].main === "Mist") {
+            $(dId).css("background", "#78777F");
+        }
+
+
         nData.push(convertToDate(today.dt).toDateString().substring(0, 10));
-        nData.push(cityName);
+        nData.push(sessionStorage.getItem("cityName"));
         nData.push(convertToDate(today.sunrise).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true }));
         nData.push(convertToDate(today.sunset).toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true }));
         nData.push(Math.round(today.wind_speed) + " mph");
@@ -189,3 +196,19 @@ function changeIcon(id, time) {
         return nightIconList[id];
     }
 }
+
+$("form").submit(function(e) {
+    e.preventDefault();
+    var newZip = $("input").first().val();
+    sessionStorage.setItem("zipCode", newZip);
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.openweathermap.org/data/2.5/weather?zip=' + sessionStorage.getItem("zipCode") + '&appid=c0c35b925bbddaaf1dca134adf31f13a',
+        success: function(data) {
+            sessionStorage.setItem("lat", data.coord.lat);
+            sessionStorage.setItem("lon", data.coord.lon);
+            sessionStorage.setItem("cityName", data.name);
+            runAPI();
+        }
+    });
+});
