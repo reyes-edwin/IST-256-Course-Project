@@ -1,6 +1,6 @@
 $(document).ready(function(){
   //testAPICall();
-  getLocation();
+  // getLocation();
 });
 
 //  API Testing
@@ -15,20 +15,18 @@ $(document).ready(function(){
 // }
 
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    alert("Geoloc not supported");
-  }
-}
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     alert("Geoloc not supported");
+//   }
+// }
 
-function showPosition(position) {
-  alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
-}
-
-
-///////////////////
+// function showPosition(position) {
+//   alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+// }
+//////////////
 
 $("#detectLocation").click(submitDetectedLocation);
 
@@ -70,12 +68,12 @@ function setCoords(position) {
       sessionStorage.setItem("zipCode", "undetected");
       setName(lat, lon);
 
-      //Used to Test Lat/Lon
-      let loc1 = sessionStorage.getItem("lat");
-      let loc2 = sessionStorage.getItem("lon");
-      alert("Lat: " + loc1 + " Lon: " + loc2);
+    //Used to Test Lat/Lon
+      // let loc1 = sessionStorage.getItem("lat");
+      // let loc2 = sessionStorage.getItem("lon");
+      // alert("Lat: " + loc1 + " Lon: " + loc2);
     } else{
-      alert("coords registered as null");
+      console.log("Error: The coordinates were registered as null.");
       
     }
   } else {
@@ -86,13 +84,13 @@ function setCoords(position) {
 function showAutoLocError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
-      alert("User denied the request for Geolocation.");
+      alert("Please change your browser's permissions to allow for automatic location detection.");
       break;
     case error.POSITION_UNAVAILABLE:
       alert("Location information is unavailable.");
       break;
     case error.TIMEOUT:
-      alert("The request to get user location timed out.");
+      alert("The request to get your location timed out. Please");
       break;
     case error.UNKNOWN_ERROR:
       alert("An unknown error occurred.");
