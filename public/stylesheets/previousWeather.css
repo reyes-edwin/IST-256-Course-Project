@@ -81,7 +81,7 @@
 
 body {
   font-family: "Quicksand", sans-serif;
-  height: 100vh;
+  height: 100%;
   line-height: 1.4;
   background: linear-gradient(0deg, rgba(230,228,159,1) 0%, rgba(39,48,67,1) 100%);
   background-repeat: no-repeat;

@@ -90,7 +90,7 @@
 
 body {
     font-family: "Quicksand", sans-serif;
-    height: 100vh;
+    height: 100%;
     line-height: 1.4;
     /* background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(135,206,250,1) 100%); */
