@@ -238,3 +238,5 @@ external OpenWeather API, this problem does not exist.
 // function showPosition(position) {
 //   alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
 // }
+
+

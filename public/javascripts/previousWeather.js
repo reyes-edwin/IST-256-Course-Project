@@ -10,7 +10,7 @@ function getWeather() {
       sessionStorage.getItem("zipCode") +
       ",us&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a",
     function (data) {
-      // console.log(data);
+      console.log(data);
       let date = data.dt;
       let lat = data.coord.lat;
       let lon = data.coord.lon;
@@ -19,11 +19,13 @@ function getWeather() {
       // Retrieving the previous date
       prev_date.setDate(prev_date.getDate() - 1);
 
+      // Formatting as ex: 10/12/2020
       prev_date.toDateString();
 
       // Covert to unix time stamp
       let previous = Math.floor(prev_date / 1000);
 
+      // Using the data from above to retrieve the lat and lon
       $.getJSON(
         "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=" +
           lat +
@@ -33,11 +35,13 @@ function getWeather() {
           previous +
           "&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a",
         function (api) {
-          // console.log(api);
+          console.log(api);
 
+          // getting the temp from the previous day
           let temp = Math.floor(api.current.temp);
           $(".temp").html(temp + "&deg;F");
 
+          // retrieving the condition from previous day
           let weather = api.current.weather[0].main;
           $(".condition").html(weather);
 
@@ -47,8 +51,8 @@ function getWeather() {
           $(".prevDate").html("as of " + prev_date.toDateString());
 
           // Select the wind class and append the current wind speed
-          let wind = data.wind.speed;
-          $(".wind").append(wind + " mph");
+          let wind = api.current.wind_speed;
+          $("#windSpeed").html(wind + " mph");
 
           // Select the sunrise class
           let rise = api.current.sunrise;
@@ -64,7 +68,7 @@ function getWeather() {
           var formattedTime = hours + ":" + minutes.substr(-2);
 
           // append the time the sun rose
-          $(".sunrise").append(formattedTime + " am");
+          $("#rise").html(formattedTime + " am");
 
           // Select the sunset class
           let set = api.current.sunset;
@@ -72,8 +76,8 @@ function getWeather() {
 
           // Hours part from the timestamp
           var hours = date.getHours();
-
           hours = hours % 12 || 12;
+
           // Minutes part from the timestamp
           var minutes = "0" + date.getMinutes();
 
@@ -81,7 +85,7 @@ function getWeather() {
           var formattedTime = hours + ":" + minutes.substr(-2);
 
           // append the time the sun rose
-          $(".sunset").append(formattedTime + " pm");
+          $("#set").html(formattedTime + " pm");
 
           // list of icons based on the weather condition
           const nightIconList = {
@@ -199,6 +203,7 @@ function getWeather() {
             804: "./images/day-icons/ios11-weather-cloudy-icon.png",
           };
 
+          // changing the icon based on the time of day
           function changeIcon(id, time) {
             if (time == "d") {
               return dayIconList[id];
@@ -239,8 +244,10 @@ function getWeather() {
   );
 }
 
+// On submit get the new zip and retrieve the current weather
 $("form").submit(function (e) {
   e.preventDefault();
+  // setting the new zip from input into session storage
   var newZip = $("input").first().val();
   sessionStorage.setItem("zipCode", newZip);
   $.ajax({
