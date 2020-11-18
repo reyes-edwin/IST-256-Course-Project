@@ -5,8 +5,15 @@ $(document).ready(function() {
 
 // Retrieving the API with the unique API key
 function getWeather() {
-    let lat = sessionStorage.getItem("lat");
-    let lon = sessionStorage.getItem("lon");
+    // $.getJSON(
+    //     "http://api.openweathermap.org/data/2.5/weather?q=" +
+    //     sessionStorage.getItem("zipCode") +
+    //     ",us&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a",
+    //     function(data) {
+    //         console.log(data);
+    //         let date = data.dt;
+    let lat = sessionStorage.getItem("lat"); //data.coord.lat;
+    let lon = sessionStorage.getItem("lon"); //data.coord.lon;
 
     var prev_date = new Date();
     // Retrieving the previous date
@@ -207,7 +214,7 @@ function getWeather() {
 
             $(".icon").attr(
                 "src",
-                changeIcon(data.weather[0].id, data.weather[0].icon.substring(2))
+                changeIcon(api.current.weather[0].id, api.current.weather[0].icon.substring(2))
             );
 
             // Change the background image and the container color depending on the weather condition.
@@ -233,13 +240,15 @@ function getWeather() {
             }
         }
     );
-}
+} //);
+//}
 
 // On submit get the new zip and retrieve the current weather
 $("form").submit(function(e) {
     e.preventDefault();
     // setting the new zip from input into session storage
     var newZip = $("input").first().val();
+    alert(newZip);
     sessionStorage.setItem("zipCode", newZip);
     $.ajax({
         method: "GET",
