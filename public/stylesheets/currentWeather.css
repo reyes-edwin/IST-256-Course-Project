@@ -115,6 +115,7 @@ body {
 .current {
   display: flex;
   justify-content: space-evenly;
+  padding: 20px;
 }
 .current img {
   height: 2em;
@@ -125,6 +126,11 @@ body {
   font-size: 14px;
   align-items: center;
   color: rgb(226, 226, 226);
+}
+
+.icon {
+  height: 100px;
+  margin-left: 30px;
 }
 /* End of the main section */
 
