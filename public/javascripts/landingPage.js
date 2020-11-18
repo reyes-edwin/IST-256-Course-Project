@@ -49,7 +49,9 @@ function setCoords(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
 
+    alert();
     if (typeof Storage !== "undefined") {
+
         if (lat != null && lon != null) {
             sessionStorage.setItem("lat", lat);
             sessionStorage.setItem("lon", lon);
