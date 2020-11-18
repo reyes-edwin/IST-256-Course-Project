@@ -5,14 +5,16 @@ $(document).ready(function() {
 });
 
 // Handler for auto-detect location button
-$("#detectLocation").click(submitDetectedLocation);
-
-function submitDetectedLocation() {
+$("#detectLocation").click(function(e) {
+    //e.preventDefault();
+    alert("start");
     getAutoLocation();
-    if (sessionStorage.getItem("lat") != 'null') {
+    alert("endOfClick");
+});
+
+function clicker() {
+    if (sessionStorage.getItem("lat")) {
         $(location).attr("href", "currentWeather.html");
-    } else {
-        event.preventDefault();
     }
 }
 
@@ -35,13 +37,16 @@ function submitProvidedLocation() {
 //Retrieve location coordinates from Geolocation auto-detection.
 function getAutoLocation() {
     if (navigator.geolocation) {
+        alert("getAutoLocation");
         navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
+        alert("setCoords was called");
     } else {
         alert("Geolocation is not supported by this browser.");
     }
 }
 
 function setCoords(position) {
+    alert("setcoords");
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
 
@@ -51,11 +56,12 @@ function setCoords(position) {
             sessionStorage.setItem("lon", lon);
             sessionStorage.setItem("zipCode", "undetected");
             setName(lat, lon);
-
+            alert("callign clicker");
             //Used to Test Lat/Lon
             // let loc1 = sessionStorage.getItem("lat");
             // let loc2 = sessionStorage.getItem("lon");
             // alert("Lat: " + loc1 + " Lon: " + loc2);
+            clicker();
         } else {
             console.log("Error: The coordinates were registered as null.");
         }
@@ -76,18 +82,18 @@ function showAutoLocError(error) {
             break;
         case error.POSITION_UNAVAILABLE:
             alert("Location information is unavailable.");
-            sessionStorage.setItem("lat", null);
-            sessionStorage.setItem("lon", null);
+            // sessionStorage.setItem("lat", null);
+            // sessionStorage.setItem("lon", null);
             break;
         case error.TIMEOUT:
             alert("The request to get your location timed out. Please");
-            sessionStorage.setItem("lat", null);
-            sessionStorage.setItem("lon", null);
+            // sessionStorage.setItem("lat", null);
+            // sessionStorage.setItem("lon", null);
             break;
         case error.UNKNOWN_ERROR:
             alert("An unknown error occurred.");
-            sessionStorage.setItem("lat", null);
-            sessionStorage.setItem("lon", null);
+            // sessionStorage.setItem("lat", null);
+            // sessionStorage.setItem("lon", null);
             break;
     }
 }
@@ -155,8 +161,9 @@ function setCoordsFromZip(zipCode) {
 //Set the city name using a call to the API with the detected latitude and longitude.
 function setName(lat, lon) {
     const apiKey = "c0c35b925bbddaaf1dca134adf31f13a";
-
+    alert("setName");
     if (lat != null && lon != null) {
+        alert("Hacker Voice: I'm in");
         $.ajax({
             method: "GET",
             url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
