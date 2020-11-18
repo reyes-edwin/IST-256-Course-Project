@@ -1,5 +1,7 @@
 $(document).ready(function() {
     //testAPICall();
+    // getLocation();
+
 });
 
 //  API Testing
@@ -14,14 +16,26 @@ $(document).ready(function() {
 // }
 
 
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     alert("Geoloc not supported");
+//   }
+// }
 
+// function showPosition(position) {
+//   alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+// }
+//////////////
 
 $("#detectLocation").click(submitDetectedLocation);
 
 function submitDetectedLocation() {
-    console.log("submit button");
+
     getAutoLocation();
     $(location).attr("href", "currentWeather.html");
+
 }
 
 $("#zipCodeForm").submit(submitProvidedLocation);
@@ -38,45 +52,78 @@ function submitProvidedLocation() {
 }
 
 function getAutoLocation() {
+    function setCoords(position) {
+        alert("setCoords");
+        console.log(position);
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+
+        if (typeof Storage != "undefined") {
+            alert("first if");
+            if (lat != null && lon != null) {
+                console.log("Hello");
+                sessionStorage.setItem("lat", lat);
+                sessionStorage.setItem("lon", lon);
+                sessionStorage.setItem("zipCode", "undetected");
+                setName(lat, lon);
+
+                //Used to Test Lat/Lon
+                // let loc1 = sessionStorage.getItem("lat");
+                // let loc2 = sessionStorage.getItem("lon");
+                // alert("Lat: " + loc1 + " Lon: " + loc2);
+            } else {
+                console.log("Error: The coordinates were registered as null.");
+
+            }
+        }
+    }
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
+        alert("getAutoLocation");
+        navigator.geolocation.getCurrentPosition(setCoords); //, showAutoLocError);
     } else {
         alert("Geolocation is not supported by this browser.");
     }
+
+
 }
 
-function setCoords(position) {
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
+// function setCoords(position) {
+//     alert("setCoords");
+//     console.log(position);
+//     let lat = position.coords.latitude;
+//     let lon = position.coords.longitude;
 
-    alert();
-    if (typeof Storage !== "undefined") {
+//     if (typeof Storage != "undefined") {
+//         alert("first if");
+//         if (lat != null && lon != null) {
+//             console.log("Hello");
+//             sessionStorage.setItem("lat", lat);
+//             sessionStorage.setItem("lon", lon);
+//             sessionStorage.setItem("zipCode", "undetected");
+//             setName(lat, lon);
 
-        if (lat != null && lon != null) {
-            sessionStorage.setItem("lat", lat);
-            sessionStorage.setItem("lon", lon);
-            sessionStorage.setItem("zipCode", "undetected");
+//             //Used to Test Lat/Lon
+//             // let loc1 = sessionStorage.getItem("lat");
+//             // let loc2 = sessionStorage.getItem("lon");
+//             // alert("Lat: " + loc1 + " Lon: " + loc2);
+//         } else {
+//             console.log("Error: The coordinates were registered as null.");
 
-            //Used to Test Lat/Lon
-            let loc1 = sessionStorage.getItem("lat");
-            let loc2 = sessionStorage.getItem("lon");
-            alert("Lat: " + loc1 + " Lon: " + loc2);
-        }
-    } else {
-        alert("Sorry, your browser does not support Web Storage...");
-    }
-}
+//         }
+//     }
+// }
 
 function showAutoLocError(error) {
+
     switch (error.code) {
         case error.PERMISSION_DENIED:
-            alert("User denied the request for Geolocation.");
+            alert("Please change your browser's permissions to allow for automatic location detection.");
             break;
         case error.POSITION_UNAVAILABLE:
             alert("Location information is unavailable.");
             break;
         case error.TIMEOUT:
-            alert("The request to get user location timed out.");
+            alert("The request to get your location timed out. Please");
             break;
         case error.UNKNOWN_ERROR:
             alert("An unknown error occurred.");
@@ -99,8 +146,9 @@ function setZipCode(zipCode) {
 }
 
 function verifyZipCode(zipCode) {
+
     let isValid = false;
-    apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+    const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
 
     if (zipCode != null && zipCode >= 0) {
         $.ajax({
@@ -117,17 +165,20 @@ function verifyZipCode(zipCode) {
                 isValid = false;
             }
         });
-    } else {
-        isValid = false;
+
     }
     return isValid;
 }
 
+
 function setCoordsFromZip(zipCode) {
+    const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
     if (zipCode != null) {
         $.ajax({
             method: 'GET',
             url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+            async: false,
             success: function(data) {
                 sessionStorage.setItem("lat", data.coord.lat);
                 sessionStorage.setItem("lon", data.coord.lon);
@@ -139,4 +190,24 @@ function setCoordsFromZip(zipCode) {
             }
         });
     }
+}
+
+function setName(lat, lon) {
+    const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+    if (lat != null && lon != null) {
+        $.ajax({
+            method: 'GET',
+            url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+            async: false,
+            success: function(data) {
+                sessionStorage.setItem("cityName", data.name);
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = xhr.status + ': ' + xhr.statusText;
+                console.log("Error: " + errorMessage);
+            }
+        });
+    }
+
 }
