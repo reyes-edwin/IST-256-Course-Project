@@ -1,5 +1,8 @@
-$(document).ready(function() {
-    //testAPICall();
+
+$(document).ready(function(){
+  //testAPICall();
+  // getLocation();
+
 });
 
 //  API Testing
@@ -14,14 +17,26 @@ $(document).ready(function() {
 // }
 
 
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     alert("Geoloc not supported");
+//   }
+// }
 
+// function showPosition(position) {
+//   alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+// }
+//////////////
 
 $("#detectLocation").click(submitDetectedLocation);
 
 function submitDetectedLocation() {
-    console.log("submit button");
-    getAutoLocation();
-    $(location).attr("href", "currentWeather.html");
+
+  getAutoLocation();
+  $(location).attr("href", "currentWeather.html");
+
 }
 
 $("#zipCodeForm").submit(submitProvidedLocation);
@@ -46,40 +61,44 @@ function getAutoLocation() {
 }
 
 function setCoords(position) {
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
 
-    if (typeof Storage !== "undefined") {
-        if (lat != null && lon != null) {
-            sessionStorage.setItem("lat", lat);
-            sessionStorage.setItem("lon", lon);
-            sessionStorage.setItem("zipCode", "undetected");
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
 
-            //Used to Test Lat/Lon
-            let loc1 = sessionStorage.getItem("lat");
-            let loc2 = sessionStorage.getItem("lon");
-            alert("Lat: " + loc1 + " Lon: " + loc2);
-        }
-    } else {
-        alert("Sorry, your browser does not support Web Storage...");
+  if (typeof Storage !== "undefined") {
+    if (lat != null && lon != null) {
+      console.log("Hello");
+      sessionStorage.setItem("lat", lat);
+      sessionStorage.setItem("lon", lon);
+      sessionStorage.setItem("zipCode", "undetected");
+      setName(lat, lon);
+
+    //Used to Test Lat/Lon
+      // let loc1 = sessionStorage.getItem("lat");
+      // let loc2 = sessionStorage.getItem("lon");
+      // alert("Lat: " + loc1 + " Lon: " + loc2);
+    } else{
+      console.log("Error: The coordinates were registered as null.");
+
     }
 }
 
 function showAutoLocError(error) {
-    switch (error.code) {
-        case error.PERMISSION_DENIED:
-            alert("User denied the request for Geolocation.");
-            break;
-        case error.POSITION_UNAVAILABLE:
-            alert("Location information is unavailable.");
-            break;
-        case error.TIMEOUT:
-            alert("The request to get user location timed out.");
-            break;
-        case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.");
-            break;
-    }
+
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert("Please change your browser's permissions to allow for automatic location detection.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      alert("The request to get your location timed out. Please");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("An unknown error occurred.");
+      break;
+  }
 }
 
 
@@ -97,44 +116,65 @@ function setZipCode(zipCode) {
 }
 
 function verifyZipCode(zipCode) {
-    let isValid = false;
-    apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
 
-    if (zipCode != null && zipCode >= 0) {
-        $.ajax({
-            method: 'GET',
-            url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
-            async: false,
-            success: function(data) {
-                console.log(data);
-                isValid = true;
-            },
-            error: function(xhr, status, error) {
-                var errorMessage = xhr.status + ': ' + xhr.statusText;
-                console.log("Error: " + errorMessage);
-                isValid = false;
-            }
-        });
-    } else {
+  let isValid = false;
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+  if (zipCode != null && zipCode >= 0) {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
+        console.log(data);
+        isValid = true;
+      }, 
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
         isValid = false;
     }
     return isValid;
 }
 
-function setCoordsFromZip(zipCode) {
-    if (zipCode != null) {
-        $.ajax({
-            method: 'GET',
-            url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
-            success: function(data) {
-                sessionStorage.setItem("lat", data.coord.lat);
-                sessionStorage.setItem("lon", data.coord.lon);
-                sessionStorage.setItem("cityName", data.name);
-            },
-            error: function(xhr, status, error) {
-                var errorMessage = xhr.status + ': ' + xhr.statusText;
-                console.log("Error: " + errorMessage);
-            }
-        });
-    }
+
+function setCoordsFromZip(zipCode){
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+  if(zipCode != null){
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
+        sessionStorage.setItem("lat", data.coord.lat);
+        sessionStorage.setItem("lon", data.coord.lon);
+        sessionStorage.setItem("cityName", data.name);
+      },
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+      }
+    });
+  }
+}
+
+function setName(lat, lon){
+  const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
+
+  if(lat != null && lon != null){
+    $.ajax({
+      method: 'GET',
+      url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+      async: false,
+      success: function(data) {
+        sessionStorage.setItem("cityName", data.name);
+      },
+      error: function(xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText;
+        console.log("Error: " + errorMessage);
+      }
+    });
+  }
+
 }
