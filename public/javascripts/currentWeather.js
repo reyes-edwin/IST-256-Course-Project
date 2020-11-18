@@ -3,15 +3,17 @@ $(document).ready(function () {
   getWeather();
 });
 
+let getZip = sessionStorage.getItem("zipCode");
+
 function getWeather() {
   $.getJSON(
     "http://api.openweathermap.org/data/2.5/weather?q=" +
-      sessionStorage.getItem("zipCode") +
+      getZip +
       ",us&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a",
 
     function getWeather(data) {
       console.log(data);
-      console.log("User entered: " + sessionStorage.getItem("zipCode"));
+      console.log("User entered: " + getZip);
       // getting the temperature from the API
       let temp = Math.floor(data.main.temp);
       $(".temp").html(temp + "&deg;F");
@@ -26,8 +28,9 @@ function getWeather() {
 
       // Select the wind class and append the current wind speed
       let wind = data.wind.speed;
-      let windImg = $(".wind").html();
-      $(".wind").html(windImg + wind + " mph");
+      $("#windSpeed").html(wind + " mph");
+    
+
 
       // Select the sunrise class
       let rise = data.sys.sunrise;
@@ -43,9 +46,8 @@ function getWeather() {
       var formattedTime = hours + ":" + minutes.substr(-2);
 
       // append the time the sun rose
-      let riseImg = $('#sunrise').html();
-      // $(".sunrise").html(riseImg + formattedTime + " am");
-      document.getElementById('sunrise').innerHTML = riseImg + formattedTime + ' am';
+      $("#rise").html(formattedTime + " am")
+      
 
       // Select the sunset class
       let set = data.sys.sunset;
@@ -62,7 +64,7 @@ function getWeather() {
       var formattedTime = hours + ":" + minutes.substr(-2);
 
       // append the time the sun rose
-      // $(".sunset").append(formattedTime + " pm");
+      $("#set").html(formattedTime + " pm");
       
       
 
