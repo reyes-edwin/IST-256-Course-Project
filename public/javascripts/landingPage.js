@@ -1,6 +1,8 @@
+
 $(document).ready(function(){
   //testAPICall();
   // getLocation();
+
 });
 
 //  API Testing
@@ -31,32 +33,35 @@ $(document).ready(function(){
 $("#detectLocation").click(submitDetectedLocation);
 
 function submitDetectedLocation() {
+
   getAutoLocation();
   $(location).attr("href", "currentWeather.html");
+
 }
 
 $("#zipCodeForm").submit(submitProvidedLocation);
 
 function submitProvidedLocation() {
-  let zipCode = $("#zipCode").val();
-  if(verifyZipCode(zipCode)){
-    setZipCode(zipCode);
-  } else{
-    setZipCode(null);
-    event.preventDefault();
-    alert("Sorry, it appears this zip code's weather data is unavailable.\nPlease enter a new zip code!");
-  }
+    let zipCode = $("#zipCode").val();
+    if (verifyZipCode(zipCode)) {
+        setZipCode(zipCode);
+    } else {
+        setZipCode(null);
+        event.preventDefault();
+        alert("Sorry, it appears this zip code's weather data is unavailable.\nPlease enter a new zip code!");
+    }
 }
 
 function getAutoLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
 }
 
 function setCoords(position) {
+
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
@@ -74,14 +79,12 @@ function setCoords(position) {
       // alert("Lat: " + loc1 + " Lon: " + loc2);
     } else{
       console.log("Error: The coordinates were registered as null.");
-      
+
     }
-  } else {
-    alert("Sorry, your browser does not support Web Storage...");
-  }
 }
 
 function showAutoLocError(error) {
+
   switch (error.code) {
     case error.PERMISSION_DENIED:
       alert("Please change your browser's permissions to allow for automatic location detection.");
@@ -102,17 +105,18 @@ function showAutoLocError(error) {
 
 
 function setZipCode(zipCode) {
-  if (typeof Storage !== "undefined") {
-    sessionStorage.setItem("zipCode", zipCode);
-    if(zipCode != null){
-      setCoordsFromZip(zipCode);
+    if (typeof Storage !== "undefined") {
+        sessionStorage.setItem("zipCode", zipCode);
+        if (zipCode != null) {
+            setCoordsFromZip(zipCode);
+        }
+    } else {
+        alert("Sorry, your browser does not support Web Storage...");
     }
-  } else {
-    alert("Sorry, your browser does not support Web Storage...");
-  }
 }
 
 function verifyZipCode(zipCode) {
+
   let isValid = false;
   const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
 
@@ -129,14 +133,10 @@ function verifyZipCode(zipCode) {
         var errorMessage = xhr.status + ': ' + xhr.statusText;
         console.log("Error: " + errorMessage);
         isValid = false;
-      }
-    });
-  } 
-  else{
-    isValid = false;
-  }
-  return isValid;
+    }
+    return isValid;
 }
+
 
 function setCoordsFromZip(zipCode){
   const apiKey = 'c0c35b925bbddaaf1dca134adf31f13a';
@@ -176,4 +176,5 @@ function setName(lat, lon){
       }
     });
   }
+
 }
