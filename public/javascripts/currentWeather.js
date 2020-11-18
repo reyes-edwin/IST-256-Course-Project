@@ -3,20 +3,20 @@ $(document).ready(function () {
   getWeather();
 });
 
-let getZip = sessionStorage.getItem("zipCode");
-
+// Retrieving the API
 function getWeather() {
   $.getJSON(
     "http://api.openweathermap.org/data/2.5/weather?q=" +
-      getZip +
+      sessionStorage.getItem("zipCode") +
       ",us&units=imperial&appid=c0c35b925bbddaaf1dca134adf31f13a",
 
     function getWeather(data) {
       console.log(data);
-      console.log("User entered: " + getZip);
-      // getting the temperature from the API
-      let temp = Math.floor(data.main.temp);
-      $(".temp").html(temp + "&deg;F");
+      console.log("User entered: " + sessionStorage.getItem("zipCode"));
+
+      // setting the current temp in session storage and retrieving it
+      let temp = sessionStorage.setItem("temp", Math.floor(data.main.temp));
+      $(".temp").html(sessionStorage.getItem("temp") + "&deg;F");
 
       // getting the weather condition rom the API
       let weather = data.weather[0].main;
@@ -29,8 +29,6 @@ function getWeather() {
       // Select the wind class and append the current wind speed
       let wind = data.wind.speed;
       $("#windSpeed").html(wind + " mph");
-    
-
 
       // Select the sunrise class
       let rise = data.sys.sunrise;
@@ -46,8 +44,7 @@ function getWeather() {
       var formattedTime = hours + ":" + minutes.substr(-2);
 
       // append the time the sun rose
-      $("#rise").html(formattedTime + " am")
-      
+      $("#rise").html(formattedTime + " am");
 
       // Select the sunset class
       let set = data.sys.sunset;
@@ -65,9 +62,6 @@ function getWeather() {
 
       // append the time the sun rose
       $("#set").html(formattedTime + " pm");
-      
-      
-
 
       // list of icons based on the weather condition
       const nightIconList = {
@@ -185,6 +179,7 @@ function getWeather() {
         804: "./images/day-icons/ios11-weather-cloudy-icon.png",
       };
 
+      // changing the icon based on the time of day
       function changeIcon(id, time) {
         if (time == "d") {
           return dayIconList[id];
@@ -197,7 +192,7 @@ function getWeather() {
         "src",
         changeIcon(data.weather[0].id, data.weather[0].icon.substring(2))
       );
-      
+
       // Change the background image and the container color depending on the weather condition.
       if (weather === "Clear") {
         document.body.style.backgroundImage = "url('images/clearSky.jpg')";
@@ -223,6 +218,7 @@ function getWeather() {
   );
 }
 
+// On submit get the new zip and retrieve the current weather
 $("form").submit(function (e) {
   e.preventDefault();
   var newZip = $("input").first().val();
