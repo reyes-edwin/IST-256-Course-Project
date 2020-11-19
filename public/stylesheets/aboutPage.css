@@ -48,16 +48,13 @@
   color: #e6e49fff;
 }
 
-
 /* End of the nav section */
 
 /* Start of the main section */
-
 body {
   font-family: "Quicksand", sans-serif;
-  height: 100%;
+  height: 100vh;
   line-height: 1.4;
-  background: rgb(39, 48, 67);
   background: linear-gradient(
     180deg,
     rgba(39, 48, 67, 1) 0%,
@@ -124,14 +121,14 @@ a {
 /* Start of footer */
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    background-color: #273043ff;
-    color: #e2e2e2;
-    font-weight: 600;
-    padding: 2.3rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  background-color: #273043ff;
+  color: #e2e2e2;
+  font-weight: 600;
+  padding: 2.3rem;
 }
 
 footer p {
