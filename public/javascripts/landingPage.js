@@ -7,12 +7,13 @@ $(document).ready(function() {
 // Handler for auto-detect location button
 $("#detectLocation").click(function(e) {
     //e.preventDefault();
-    alert("start");
+    // alert("start");
     getAutoLocation();
-    alert("endOfClick");
+    // alert("endOfClick");
 });
 
-function clicker() {
+//Delegate for changing the page during automatic location detection
+function updatePage() {
     if (sessionStorage.getItem("lat")) {
         $(location).attr("href", "currentWeather.html");
     }
@@ -37,16 +38,16 @@ function submitProvidedLocation() {
 //Retrieve location coordinates from Geolocation auto-detection.
 function getAutoLocation() {
     if (navigator.geolocation) {
-        alert("getAutoLocation");
+        // alert("getAutoLocation");
         navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
-        alert("setCoords was called");
+        // alert("setCoords was called");
     } else {
         alert("Geolocation is not supported by this browser.");
     }
 }
 
 function setCoords(position) {
-    alert("setcoords");
+    //alert("setcoords");
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
 
@@ -56,12 +57,12 @@ function setCoords(position) {
             sessionStorage.setItem("lon", lon);
             sessionStorage.setItem("zipCode", "undetected");
             setName(lat, lon);
-            alert("callign clicker");
+            // alert("calling clickHandler");
             //Used to Test Lat/Lon
             // let loc1 = sessionStorage.getItem("lat");
             // let loc2 = sessionStorage.getItem("lon");
             // alert("Lat: " + loc1 + " Lon: " + loc2);
-            clicker();
+            updatePage();
         } else {
             console.log("Error: The coordinates were registered as null.");
         }
@@ -161,9 +162,8 @@ function setCoordsFromZip(zipCode) {
 //Set the city name using a call to the API with the detected latitude and longitude.
 function setName(lat, lon) {
     const apiKey = "c0c35b925bbddaaf1dca134adf31f13a";
-    alert("setName");
+    // alert("setName");
     if (lat != null && lon != null) {
-        alert("Hacker Voice: I'm in");
         $.ajax({
             method: "GET",
             url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
