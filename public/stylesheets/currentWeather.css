@@ -30,7 +30,7 @@
 .nav-links {
   display: flex;
   list-style: none;
-  justify-content: space-evenly
+  justify-content: space-evenly;
 }
 
 .nav-links a {
@@ -77,7 +77,11 @@ body {
   font-family: "Quicksand", sans-serif;
   height: 100vh;
   line-height: 1.4;
-  background: linear-gradient(0deg, rgba(230,228,159,1) 0%, rgba(39,48,67,1) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(230, 228, 159, 1) 0%,
+    rgba(39, 48, 67, 1) 100%
+  );
   background-repeat: no-repeat;
   background-size: cover;
 }
