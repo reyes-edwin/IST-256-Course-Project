@@ -53,7 +53,7 @@
 /* Start of the main section */
 body {
   font-family: "Quicksand", sans-serif;
-  height: 100vh;
+  height: 100%;
   line-height: 1.4;
   background: linear-gradient(
     180deg,
