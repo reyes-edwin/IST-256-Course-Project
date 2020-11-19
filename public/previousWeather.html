@@ -21,7 +21,17 @@
         </div>
         <div class="search">
             <form class="search-form">
-                <input type="text" id="input" placeholder="Enter your zip code..." />
+                <input
+                type="text"
+                id="input"
+                placeholder="Enter your zip code..."
+                name="zipCode"
+                minlength="5"
+                maxlength="5"
+                pattern="^\d{5}$"
+                title="Exactly 5 digits (e.g.: 12345)"
+                required
+              />
                 <input type="submit" value="Submit" />
             </form>
         </div>
