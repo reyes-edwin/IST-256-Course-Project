@@ -243,17 +243,40 @@ $("form").submit(function (e) {
   // setting the new zip from input into session storage
   var newZip = $("input").first().val();
   sessionStorage.setItem("zipCode", newZip);
+  // $.ajax({
+  //   method: "GET",
+  //   url:
+  //     "https://api.openweathermap.org/data/2.5/weather?zip=" +
+  //     sessionStorage.getItem("zipCode") +
+  //     "&appid=c0c35b925bbddaaf1dca134adf31f13a",
+  //   success: function (data) {
+  //     sessionStorage.setItem("lat", data.coord.lat);
+  //     sessionStorage.setItem("lon", data.coord.lon);
+  //     sessionStorage.setItem("cityName", data.name);
+  //     getWeather();
+  //   },
+  // });
+
+  //Updated API call, calls to server which interacts with Open Weather API
+  var zipCode = sessionStorage.getItem("zipCode");
+
   $.ajax({
     method: "GET",
-    url:
-      "https://api.openweathermap.org/data/2.5/weather?zip=" +
-      sessionStorage.getItem("zipCode") +
-      "&appid=c0c35b925bbddaaf1dca134adf31f13a",
+    url: "/weather/zipCode",
+    data: {
+      zipCode: zipCode,
+    },
+    async: false,
     success: function (data) {
       sessionStorage.setItem("lat", data.coord.lat);
       sessionStorage.setItem("lon", data.coord.lon);
       sessionStorage.setItem("cityName", data.name);
       getWeather();
     },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+    },
   });
+  
 });
