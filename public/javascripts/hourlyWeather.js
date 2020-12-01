@@ -137,7 +137,7 @@ function runAPI() {
   var lon = sessionStorage.getItem("lon");
   $.ajax({
     method: "GET",
-    url: "/weather/onecallcoords",
+    url: "/weather/coords/onecall",
     data: {
       lat: lat,
       lon: lon,
