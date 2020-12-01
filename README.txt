@@ -38,11 +38,12 @@ Sprint 2:
     Input validation and error handling for location entry:
     Verified inputted zip code against OpenWeather API to ensure validity
     Checked proper output from Geolocation API used for auto-detection of location
+
 Edwin: 
+
 Sprint 1:
     Created the current, previous and the about page. Style every page using CSS flex except the about page that contains CSS grid. 
     Ideated how we will retrieve the API and implement the real data.
-
 Sprint 2:
     Called the API with the unique API key and added various functions using JQuery in the current and previous pages. 
     This allowed the user to get real time data on the weather based on their location.
