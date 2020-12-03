@@ -2,7 +2,86 @@ $(document).ready(function () {
   // testAPICall();
   // getLocation();
   //console.log(verifyZipCodeAPI(15202));
+  createData('10', '19', '15202', 'burgh');
+  readData();
+  updateData('-1', '20.3', '16801', 'state');
+  readData();
+  deleteData();
+  readData();
 });
+
+function createData(lat, lon, zip, cityName){
+  $.ajax({
+    method: "POST",
+    url: "/create",
+    data: {
+      lat: lat,
+      lon: lon,
+      zipCode: zip,
+      cityName: cityName
+    },
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+    }
+  });
+}
+
+function readData(){
+  $.ajax({
+    method: "GET",
+    url: "/read",
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+    }
+  });
+}
+
+function updateData(lat, lon, zip, cityName){
+  $.ajax({
+    method: "POST",
+    url: "/update",
+    data: {
+      lat: lat,
+      lon: lon,
+      zipCode: zip,
+      cityName: cityName
+    },
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+    }
+  });
+}
+
+function deleteData(lat, lon, zip, cityName){
+  $.ajax({
+    method: "POST",
+    url: "/delete",
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+    }
+  });
+}
+
 
 // Handler for auto-detect location button
 $("#detectLocation").click(function (e) {
