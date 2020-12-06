@@ -1,16 +1,26 @@
 $(document).ready(function () {
-  // testAPICall();
-  // getLocation();
-  //console.log(verifyZipCodeAPI(15202));
-  createData('10', '19', '15202', 'burgh');
-  readData();
-  updateData('-1', '20.3', '16801', 'state');
-  readData();
-  deleteData();
-  readData();
+  setSessionID(sessionStorage.sessionID);
 });
 
-function createData(lat, lon, zip, cityName){
+function printData(data) {
+  console.log(data);
+}
+
+//CRUD Operations
+
+//Sets an ID called SessionID, which saves through page refreshes so data can be accessed from the database via an ID
+function setSessionID(id) {
+  if (typeof Storage !== "undefined") {
+    sessionStorage.setItem("sessionID", id);
+  } else {
+    alert("Sorry, your browser does not support Web Storage...");
+  }
+
+  sessionID = sessionStorage.sessionID;
+}
+
+//Creates an entry in the database given location data and connects this entry to the SessionID
+function createLocationData(lat, lon, zip, cityName) {
   $.ajax({
     method: "POST",
     url: "/create",
@@ -18,59 +28,96 @@ function createData(lat, lon, zip, cityName){
       lat: lat,
       lon: lon,
       zipCode: zip,
-      cityName: cityName
+      cityName: cityName,
     },
     async: false,
     success: function (data) {
-      console.log(data);
+      setSessionID(data);
+      console.log(`Data stored successfully under id: ${sessionID}`);
     },
     error: function (xhr, status, error) {
       var errorMessage = xhr.status + ": " + xhr.statusText;
       console.log("Error: " + errorMessage);
-    }
+    },
   });
 }
 
-function readData(){
+//Reads the data from an entry in the database given its ID and returns the data as a json object--or returns null if there's an error
+function readLocationData(sessionID) {
+  var locationData;
+
   $.ajax({
     method: "GET",
     url: "/read",
+    data: {
+      id: sessionID,
+    },
     async: false,
     success: function (data) {
-      console.log(data);
+      locationData = {
+        lat: data.lat,
+        lon: data.lon,
+        zipCode: data.zipCode,
+        cityName: data.cityName,
+      };
+      //console.log(data);
     },
     error: function (xhr, status, error) {
       var errorMessage = xhr.status + ": " + xhr.statusText;
       console.log("Error: " + errorMessage);
-    }
+      locationData = null;
+    },
   });
+
+  return locationData;
 }
 
-function updateData(lat, lon, zip, cityName){
+//Updates an entry in the database given its ID and and the data to be updated
+function updateLocationData(sessionID, lat, lon, zip, cityName) {
   $.ajax({
     method: "POST",
     url: "/update",
     data: {
+      id: sessionID,
       lat: lat,
       lon: lon,
       zipCode: zip,
-      cityName: cityName
+      cityName: cityName,
     },
     async: false,
     success: function (data) {
-      console.log(data);
+      console.log(`Data has been updated to: \n${data}`);
     },
     error: function (xhr, status, error) {
       var errorMessage = xhr.status + ": " + xhr.statusText;
       console.log("Error: " + errorMessage);
-    }
+    },
   });
 }
 
-function deleteData(lat, lon, zip, cityName){
+//Deletes an entry given its ID and logs what was deleted to the console
+function deleteLocationData(sessionID) {
   $.ajax({
     method: "POST",
     url: "/delete",
+    data: {
+      id: sessionID,
+    },
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+    },
+  });
+}
+
+//Deletes all entries in the database
+function clearData(lat, lon, zip, cityName) {
+  $.ajax({
+    method: "POST",
+    url: "/deleteAll",
     async: false,
     success: function (data) {
       console.log(data);
@@ -78,9 +125,10 @@ function deleteData(lat, lon, zip, cityName){
     error: function (xhr, status, error) {
       var errorMessage = xhr.status + ": " + xhr.statusText;
       console.log("Error: " + errorMessage);
-    }
+    },
   });
 }
+
 
 
 // Handler for auto-detect location button
@@ -93,7 +141,8 @@ $("#detectLocation").click(function (e) {
 
 //Delegate for changing the page during automatic location detection
 function updatePage() {
-  if (sessionStorage.getItem("lat")) {
+  //if (sessionStorage.getItem("lat")) {
+  if (readLocationData(sessionID).lat) {
     $(location).attr("href", "currentWeather.html");
   }
 }
@@ -107,7 +156,7 @@ function submitProvidedLocation() {
   if (verifyZipCode(zipCode)) {
     setZipCode(zipCode);
   } else {
-    setZipCode(null);
+    //setZipCode(null);
     event.preventDefault();
     alert(
       "Sorry, it appears this zip code's weather data is unavailable.\nPlease enter a new zip code!"
@@ -131,12 +180,35 @@ function setCoords(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
+  if (lat != null && lon != null) {
+    createLocationData(lat, lon, "undetected", getName(lat, lon));
+
+    // alert("calling clickHandler");
+    //Used to Test Lat/Lon
+    // let loc1 = sessionStorage.getItem("lat");
+    // let loc2 = sessionStorage.getItem("lon");
+    // alert("Lat: " + loc1 + " Lon: " + loc2);
+    updatePage();
+  } else {
+    console.log("Error: The coordinates were registered as null.");
+  }
+}
+
+/*
+function setCoords(position) {
+  //alert("setcoords");
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+
   if (typeof Storage !== "undefined") {
     if (lat != null && lon != null) {
       sessionStorage.setItem("lat", lat);
       sessionStorage.setItem("lon", lon);
       sessionStorage.setItem("zipCode", "undetected");
       setName(lat, lon);
+
+      
+
       // alert("calling clickHandler");
       //Used to Test Lat/Lon
       // let loc1 = sessionStorage.getItem("lat");
@@ -150,6 +222,7 @@ function setCoords(position) {
     alert("Sorry, your browser does not support Web Storage...");
   }
 }
+*/
 
 function showAutoLocError(error) {
   switch (error.code) {
@@ -157,8 +230,9 @@ function showAutoLocError(error) {
       alert(
         "Please change your browser's permissions to allow for automatic location detection."
       );
-      sessionStorage.setItem("lat", null);
-      sessionStorage.setItem("lon", null);
+      // sessionStorage.setItem("lat", null);
+      // sessionStorage.setItem("lon", null);
+      deleteLocationData(sessionID);
       break;
     case error.POSITION_UNAVAILABLE:
       alert("Location information is unavailable.");
@@ -178,6 +252,7 @@ function showAutoLocError(error) {
   }
 }
 
+/*
 //Set the zip code and coordinates after the zip code has been verified.
 function setZipCode(zipCode) {
   if (typeof Storage !== "undefined") {
@@ -187,6 +262,17 @@ function setZipCode(zipCode) {
     }
   } else {
     alert("Sorry, your browser does not support Web Storage...");
+  }
+}
+*/
+
+//Set the zip code and coordinates after the zip code has been verified.
+function setZipCode(zipCode) {
+  if (zipCode != null) {
+    var coords = getCoordsFromZip(zipCode);
+    createLocationData(coords.lat, coords.lon, zipCode, coords.cityName);
+  } else {
+    createLocationData(null, null, null, null);
   }
 }
 
@@ -227,6 +313,7 @@ function verifyZipCode(zipCode) {
   return isValid;
 }
 
+/*
 //Set the coordinates using a call to the API with the verified zip code.
 function setCoordsFromZip(zipCode) {
   $.ajax({
@@ -247,7 +334,37 @@ function setCoordsFromZip(zipCode) {
     },
   });
 }
+*/
 
+//Set the coordinates using a call to the API with the verified zip code.
+function getCoordsFromZip(zipCode) {
+  var coords;
+
+  $.ajax({
+    method: "GET",
+    url: "/weather/zipCode",
+    data: {
+      zipCode: zipCode,
+    },
+    async: false,
+    success: function (data) {
+      coords = {
+        lat: data.coord.lat,
+        lon: data.coord.lon,
+        cityName: data.name,
+      };
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = xhr.status + ": " + xhr.statusText;
+      console.log("Error: " + errorMessage);
+      coords = null;
+    },
+  });
+
+  return coords;
+}
+
+/*
 //Set the city name using a call to the API with the detected latitude and longitude.
 function setName(lat, lon) {
   if (lat != null && lon != null) {
@@ -268,6 +385,34 @@ function setName(lat, lon) {
       },
     });
   }
+}
+*/
+
+//Set the city name using a call to the API with the detected latitude and longitude.
+function getName(lat, lon) {
+  var cityName;
+
+  if (lat != null && lon != null) {
+    $.ajax({
+      method: "GET",
+      url: "/weather/coords",
+      data: {
+        lat: lat,
+        lon: lon,
+      },
+      async: false,
+      success: function (data) {
+        cityName = data.name;
+      },
+      error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ": " + xhr.statusText;
+        console.log("Error: " + errorMessage);
+        cityName = null;
+      },
+    });
+  }
+
+  return cityName;
 }
 
 //Backup functions which directly call OpenWeather API rather than local API, used for testing API.

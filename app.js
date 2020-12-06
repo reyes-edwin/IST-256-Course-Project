@@ -1,94 +1,117 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 var bodyParser = require("body-parser");
 var Location = require("./models/location");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var weatherRouter = require('./routes/weather');
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var weatherRouter = require("./routes/weather");
 
 var app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public'), {extensions: 'html'}));
+app.use(express.static(path.join(__dirname, "public"), { extensions: "html" }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/weather', weatherRouter);
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/weather", weatherRouter);
 
+app.post("/create", function (req, res) {
+  // Create a Location from the submitted data
+  var loc = new Location({
+    lat: req.body.lat,
+    lon: req.body.lon,
+    zipCode: req.body.zipCode,
+    cityName: req.body.cityName,
+  });
 
-app.post("/create", function(req, res) {
+  loc.save(function (err, loc) {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.send(loc._id);
+    }
+  });
+});
 
-    // Create a Location from the submitted data
-    var loc = new Location({
-       lat: req.body.lat,
-       lon: req.body.lon,
-       zipCode: req.body.zipCode,
-       cityName: req.body.cityName
-    });
- 
-    loc.save(function(err, loc) {
-       if (err) {
-          res.status(400).send(err);
-       } 
-       else {
-          res.send(loc._id);
-       }
-    });
- });
+// Reads a specific user's info and serves it when called
+app.get("/read", function (req, res) {
+  // Read location data from the database
+  Location.findById(req.query.id, function (err, loc) {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (loc === null) {
+        res.send("Nothing here");
+      } else {
+        res.send(loc);
+      }
+    }
+  });
+});
 
-  //TODO: Update this to eventually just read a specific user's info
- app.get("/read", function(req, res) {
+// Serves all user info in the database when called
+app.get("/readAll", function (req, res) {
+  // Read location data from the database
+  Location.findById(function (err, loc) {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (loc === null) {
+        res.send("Nothing here");
+      } else {
+        res.send(loc);
+      }
+    }
+  });
+});
 
-    // Read location data from the database
-    Location.find(
-        function(err, loc) {
-        if (loc === null) {
-            res.send("Nothing here");
-        } 
-        else {
-            res.send(loc);
-        }
-    });
- });
+// Updates user info given an id and serves the updated info
+app.post("/update", function (req, res) {
+  //Update location information in the database using submitted data
+  Location.findByIdAndUpdate(
+    req.body.id,
+    {
+      lat: req.body.lat,
+      lon: req.body.lon,
+      zipCode: req.body.zipCode,
+      cityName: req.body.cityName,
+    },
+    function (err, loc) {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.send(loc);
+      }
+    }
+  );
+});
 
-  //TODO: Update this to eventually just update a specific user's info
- app.post("/update", function(req, res) {
-    
-    //Update location information in the database using submitted data
-     Location.update(
-        {lat: req.body.lat,
-        lon: req.body.lon,
-        zipCode: req.body.zipCode,
-        cityName: req.body.cityName},
-        function(err, loc) {
-        if (err) {
-           res.status(400).send(err);
-        } 
-        else {
-           res.send(loc);
-        }
-     });
- });
+// Delete a specific set of data given its id
+app.post("/delete", function (req, res) {
+  Location.findByIdAndDelete(req.body.id, function (err, info) {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.send(info);
+    }
+  });
+});
 
- //TODO: Update delete to eventually just delete a specific user's info
- app.post("/delete", function(req, res) {
-    
-    //Update location information in the database using submitted data
-     Location.remove(function(err, info) {
-        if (err) {
-           res.status(400).send(err);
-        } 
-        else {
-           res.send(`Deleted ${info.deletedCount} item(s).`);
-        }
-     });
- });
-
+// Clear the database of all data
+app.post("/deleteAll", function (req, res) {
+  Location.deleteMany(function (err, info) {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.send(`Deleted ${info.deletedCount} item(s).`);
+    }
+  });
+});
 module.exports = app;
