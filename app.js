@@ -22,6 +22,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/weather", weatherRouter);
 
+// Creates an entry in the database which stores a location object and its properties
 app.post("/create", function (req, res) {
   // Create a Location from the submitted data
   var loc = new Location({
@@ -30,7 +31,7 @@ app.post("/create", function (req, res) {
     zipCode: req.body.zipCode,
     cityName: req.body.cityName,
   });
-
+  //Save location in database
   loc.save(function (err, loc) {
     if (err) {
       res.status(400).send(err);
@@ -104,7 +105,7 @@ app.post("/delete", function (req, res) {
   });
 });
 
-// Clear the database of all data
+// Clear the database of all data entries and sends back a message including the number of deleted entries
 app.post("/deleteAll", function (req, res) {
   Location.deleteMany(function (err, info) {
     if (err) {
