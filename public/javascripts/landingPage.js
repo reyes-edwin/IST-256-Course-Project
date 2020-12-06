@@ -1,14 +1,15 @@
 $(document).ready(function () {
+  // Deletes a user's previous weather data if they return to the welcome page after being in other parts of the site
+  if (sessionStorage.sessionID !== "undefined") {
+    deleteLocationData(sessionStorage.sessionID);
+  }
+  // Ties global variable 'sessionID' to sessionStorage.sessionID--which holds the id for the user's location entry
   setSessionID(sessionStorage.sessionID);
 });
 
-function printData(data) {
-  console.log(data);
-}
+/* SECTION: CRUD Operations */
 
-//CRUD Operations
-
-//Sets an ID called SessionID, which saves through page refreshes so data can be accessed from the database via an ID
+// Sets an ID called SessionID, which saves through page refreshes so data can be accessed from the database via an ID
 function setSessionID(id) {
   if (typeof Storage !== "undefined") {
     sessionStorage.setItem("sessionID", id);
@@ -19,7 +20,7 @@ function setSessionID(id) {
   sessionID = sessionStorage.sessionID;
 }
 
-//Creates an entry in the database given location data and connects this entry to the SessionID
+// Creates an entry in the database given location data and connects this entry to the SessionID
 function createLocationData(lat, lon, zip, cityName) {
   $.ajax({
     method: "POST",
@@ -42,7 +43,7 @@ function createLocationData(lat, lon, zip, cityName) {
   });
 }
 
-//Reads the data from an entry in the database given its ID and returns the data as a json object--or returns null if there's an error
+// Reads the data from an entry in the database given its ID and returns the data as a json object--or returns null if there's an error
 function readLocationData(sessionID) {
   var locationData;
 
@@ -60,7 +61,6 @@ function readLocationData(sessionID) {
         zipCode: data.zipCode,
         cityName: data.cityName,
       };
-      //console.log(data);
     },
     error: function (xhr, status, error) {
       var errorMessage = xhr.status + ": " + xhr.statusText;
@@ -72,7 +72,7 @@ function readLocationData(sessionID) {
   return locationData;
 }
 
-//Updates an entry in the database given its ID and and the data to be updated
+// Updates an entry in the database given its ID and and the data to be updated
 function updateLocationData(sessionID, lat, lon, zip, cityName) {
   $.ajax({
     method: "POST",
@@ -95,7 +95,7 @@ function updateLocationData(sessionID, lat, lon, zip, cityName) {
   });
 }
 
-//Deletes an entry given its ID and logs what was deleted to the console
+// Deletes an entry given its ID and logs what was deleted to the console
 function deleteLocationData(sessionID) {
   $.ajax({
     method: "POST",
@@ -113,7 +113,7 @@ function deleteLocationData(sessionID) {
   });
 }
 
-//Deletes all entries in the database
+// Deletes all entries in the database
 function clearData(lat, lon, zip, cityName) {
   $.ajax({
     method: "POST",
@@ -129,34 +129,30 @@ function clearData(lat, lon, zip, cityName) {
   });
 }
 
-
+/* SECTION: Main logic to handle interaction between the user and the landing page */
 
 // Handler for auto-detect location button
 $("#detectLocation").click(function (e) {
-  //e.preventDefault();
-  // alert("start");
   getAutoLocation();
-  // alert("endOfClick");
 });
 
-//Delegate for changing the page during automatic location detection
+// Delegate for changing the page during automatic location detection
 function updatePage() {
-  //if (sessionStorage.getItem("lat")) {
   if (readLocationData(sessionID).lat) {
     $(location).attr("href", "currentWeather.html");
   }
 }
 
-// Handler for zipCode input button, including validation that the zip code's data is available from the Weather API.
+// Handler for zipCode input button, including validation that the zip code's data is available from the Weather API
 $("#zipCodeForm").submit(submitProvidedLocation);
 
+// Callback function for above handler, verifies validity of zip code via OpenWeather API then calls setZipCode() if the zip is valid
 function submitProvidedLocation() {
   let zipCode = $("#zipCode").val();
-  console.log(zipCode);
+
   if (verifyZipCode(zipCode)) {
     setZipCode(zipCode);
   } else {
-    //setZipCode(null);
     event.preventDefault();
     alert(
       "Sorry, it appears this zip code's weather data is unavailable.\nPlease enter a new zip code!"
@@ -164,109 +160,50 @@ function submitProvidedLocation() {
   }
 }
 
-//Retrieve location coordinates from Geolocation auto-detection.
+// Retrieve location coordinates from Geolocation API 
 function getAutoLocation() {
   if (navigator.geolocation) {
-    // alert("getAutoLocation");
     navigator.geolocation.getCurrentPosition(setCoords, showAutoLocError);
-    // alert("setCoords was called");
   } else {
     alert("Geolocation is not supported by this browser.");
   }
 }
 
+// Given geographic coordinates from getAutoLocation(), this gathers the city name associated with the coordinates and creates a location entry in the database
 function setCoords(position) {
-  //alert("setcoords");
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
   if (lat != null && lon != null) {
     createLocationData(lat, lon, "undetected", getName(lat, lon));
-
-    // alert("calling clickHandler");
-    //Used to Test Lat/Lon
-    // let loc1 = sessionStorage.getItem("lat");
-    // let loc2 = sessionStorage.getItem("lon");
-    // alert("Lat: " + loc1 + " Lon: " + loc2);
     updatePage();
   } else {
     console.log("Error: The coordinates were registered as null.");
   }
 }
 
-/*
-function setCoords(position) {
-  //alert("setcoords");
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-
-  if (typeof Storage !== "undefined") {
-    if (lat != null && lon != null) {
-      sessionStorage.setItem("lat", lat);
-      sessionStorage.setItem("lon", lon);
-      sessionStorage.setItem("zipCode", "undetected");
-      setName(lat, lon);
-
-      
-
-      // alert("calling clickHandler");
-      //Used to Test Lat/Lon
-      // let loc1 = sessionStorage.getItem("lat");
-      // let loc2 = sessionStorage.getItem("lon");
-      // alert("Lat: " + loc1 + " Lon: " + loc2);
-      updatePage();
-    } else {
-      console.log("Error: The coordinates were registered as null.");
-    }
-  } else {
-    alert("Sorry, your browser does not support Web Storage...");
-  }
-}
-*/
-
+// Error handling function if an issue arises when getAutoLocation() is attempting to detect a user's location
 function showAutoLocError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
       alert(
         "Please change your browser's permissions to allow for automatic location detection."
       );
-      // sessionStorage.setItem("lat", null);
-      // sessionStorage.setItem("lon", null);
       deleteLocationData(sessionID);
       break;
     case error.POSITION_UNAVAILABLE:
       alert("Location information is unavailable.");
-      // sessionStorage.setItem("lat", null);
-      // sessionStorage.setItem("lon", null);
       break;
     case error.TIMEOUT:
       alert("The request to get your location timed out. Please");
-      // sessionStorage.setItem("lat", null);
-      // sessionStorage.setItem("lon", null);
       break;
     case error.UNKNOWN_ERROR:
       alert("An unknown error occurred.");
-      // sessionStorage.setItem("lat", null);
-      // sessionStorage.setItem("lon", null);
       break;
   }
 }
 
-/*
-//Set the zip code and coordinates after the zip code has been verified.
-function setZipCode(zipCode) {
-  if (typeof Storage !== "undefined") {
-    sessionStorage.setItem("zipCode", zipCode);
-    if (zipCode != null) {
-      setCoordsFromZip(zipCode);
-    }
-  } else {
-    alert("Sorry, your browser does not support Web Storage...");
-  }
-}
-*/
-
-//Set the zip code and coordinates after the zip code has been verified.
+// Set the zip code, geographic coordinates, and city name after the zip code has been verified via verifyZipCode()
 function setZipCode(zipCode) {
   if (zipCode != null) {
     var coords = getCoordsFromZip(zipCode);
@@ -276,7 +213,9 @@ function setZipCode(zipCode) {
   }
 }
 
-//Verify that the inputted zip code matches weather stored in the Weather API.
+/* SECTION: Functions which use ajax to interact with the API */
+
+// Verify that the inputted zip code has available weather data in the OpenWeather API and return a boolean indicating the zip code's validity
 function verifyZipCode(zipCode) {
   let isValid = false;
 
@@ -289,14 +228,10 @@ function verifyZipCode(zipCode) {
       },
       async: false,
       success: function (data) {
-        // console.log("made it to success");
-        // console.log(typeof(data.name));
         console.log(data);
         if (data.name === "Error") {
-          // console.log("false");
           isValid = false;
         } else {
-          // console.log("true");
           isValid = true;
         }
       },
@@ -313,30 +248,7 @@ function verifyZipCode(zipCode) {
   return isValid;
 }
 
-/*
-//Set the coordinates using a call to the API with the verified zip code.
-function setCoordsFromZip(zipCode) {
-  $.ajax({
-    method: "GET",
-    url: "/weather/zipCode",
-    data: {
-      zipCode: zipCode,
-    },
-    async: false,
-    success: function (data) {
-      sessionStorage.setItem("lat", data.coord.lat);
-      sessionStorage.setItem("lon", data.coord.lon);
-      sessionStorage.setItem("cityName", data.name);
-    },
-    error: function (xhr, status, error) {
-      var errorMessage = xhr.status + ": " + xhr.statusText;
-      console.log("Error: " + errorMessage);
-    },
-  });
-}
-*/
-
-//Set the coordinates using a call to the API with the verified zip code.
+// Get the coordinates and city name associated with a zip code using a call to the OpenWeather API with a verified zip code
 function getCoordsFromZip(zipCode) {
   var coords;
 
@@ -364,31 +276,7 @@ function getCoordsFromZip(zipCode) {
   return coords;
 }
 
-/*
-//Set the city name using a call to the API with the detected latitude and longitude.
-function setName(lat, lon) {
-  if (lat != null && lon != null) {
-    $.ajax({
-      method: "GET",
-      url: "/weather/coords",
-      data: {
-        lat: lat,
-        lon: lon,
-      },
-      async: false,
-      success: function (data) {
-        sessionStorage.setItem("cityName", data.name);
-      },
-      error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ": " + xhr.statusText;
-        console.log("Error: " + errorMessage);
-      },
-    });
-  }
-}
-*/
-
-//Set the city name using a call to the API with the detected latitude and longitude.
+// Get the city name associated with geographic coordinates using a call to the OpenWeather API 
 function getName(lat, lon) {
   var cityName;
 
@@ -414,92 +302,3 @@ function getName(lat, lon) {
 
   return cityName;
 }
-
-//Backup functions which directly call OpenWeather API rather than local API, used for testing API.
-
-// VerifyZipCode function which calls directly on the OpenWeather API rather than local API.
-/*
-function verifyZipCode(zipCode) {
-  let isValid = false;
-  const apiKey = "c0c35b925bbddaaf1dca134adf31f13a";
-
-  if (zipCode != null && zipCode >= 0) {
-    $.ajax({
-      method: "GET",
-      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
-      async: false,
-      success: function (data) {
-        console.log(data);
-        isValid = true;
-      },
-      error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ": " + xhr.statusText;
-        console.log("Error: " + errorMessage);
-        isValid = false;
-      },
-    });
-  } else {
-    isValid = false;
-  }
-  return isValid;
-}
-
-// SetCoordsFromZip function which calls directly on the OpenWeather API rather than local API.
-function setCoordsFromZip(zipCode) {
-  const apiKey = "c0c35b925bbddaaf1dca134adf31f13a";
-
-  if (zipCode != null) {
-    $.ajax({
-      method: "GET",
-      url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${apiKey}`,
-      async: false,
-      success: function (data) {
-        sessionStorage.setItem("lat", data.coord.lat);
-        sessionStorage.setItem("lon", data.coord.lon);
-        sessionStorage.setItem("cityName", data.name);
-      },
-      error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ": " + xhr.statusText;
-        console.log("Error: " + errorMessage);
-      },
-    });
-  }
-}
-
-//SetName function which calls directly on the OpenWeather API rather than local API.
-function setName(lat, lon) {
-  const apiKey = "c0c35b925bbddaaf1dca134adf31f13a";
-  // alert("setName");
-  if (lat != null && lon != null) {
-    $.ajax({
-      method: "GET",
-      url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
-      async: false,
-      success: function (data) {
-        sessionStorage.setItem("cityName", data.name);
-      },
-      error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ": " + xhr.statusText;
-        console.log("Error: " + errorMessage);
-      },
-    });
-  }
-}
-
-//End of backup functions
-
-*/
-
-//  Test the Geolocation built-in API
-
-// function getLocation() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(showPosition);
-//   } else {
-//     alert("Geoloc not supported");
-//   }
-// }
-
-// function showPosition(position) {
-//   alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
-// }
