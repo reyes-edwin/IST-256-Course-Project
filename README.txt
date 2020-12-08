@@ -26,6 +26,9 @@ Sprint 2:
     Formatted code to work in a single call for multiple dates
     Debugged various code that really didn't want to work for some reason
     Photoshop recolored all of the icons and build the icon object for ease of use across javascripts
+Sprint 3:
+    Ensured the new API calls and methods work and run as expected
+    General debugging with the multiple weather displays
 Drew: 
 Sprint 1:
     Created and styled landing page (index.html)
