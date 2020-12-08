@@ -13,6 +13,7 @@ After doing this process the first time, you only need to enter npm start when y
 
 To close the webpage, terminate the program by entering ctrl+c in the terminal and then enter y when it asks if you wish to terminate.
 
+You may also view this webpage by navigating to: https://rainydayweather.herokuapp.com/ on the browser of your choosing.
 
 Contribution Breakdown: 
 
@@ -29,6 +30,7 @@ Sprint 2:
 Sprint 3:
     Ensured the new API calls and methods work and run as expected
     General debugging with the multiple weather displays
+
 Drew: 
 Sprint 1:
     Created and styled landing page (index.html)
@@ -41,6 +43,13 @@ Sprint 2:
     Input validation and error handling for location entry:
     Verified inputted zip code against OpenWeather API to ensure validity
     Checked proper output from Geolocation API used for auto-detection of location
+Sprint 3:
+    Built and implemented server-side API (weather.js) to facilitate calls to OpenWeather API from our client code (files within '/public/javascripts')
+    Set up project to interact with database on MongoDB Atlas and connected the project with the database via Mongoose
+    Wrote functions to handle CRUD operations and used Ajax to connect app.js to client code to facilitate CRUD behavior
+    Implemented CRUD functionality across application and updated code for compatibility
+    Migrated project to Heroku to allow for convenient access to project
+
 
 Edwin: 
 
@@ -50,3 +59,5 @@ Sprint 1:
 Sprint 2:
     Called the API with the unique API key and added various functions using JQuery in the current and previous pages. 
     This allowed the user to get real time data on the weather based on their location.
+Sprint 3:
+    Due to unforeseen and personal circumstances, Edwin's role was limited in Sprint 3. We agreed as a group that we were comfortable with this and feel he deserves full credit for the assignment.
