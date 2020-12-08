@@ -48,7 +48,7 @@ Sprint 3:
     Set up project to interact with database on MongoDB Atlas and connected the project with the database via Mongoose
     Wrote functions to handle CRUD operations and used Ajax to connect app.js to client code to facilitate CRUD behavior
     Implemented CRUD functionality across application and updated code for compatibility
-    Migrated project to Heroku to allow for convenient access to project
+    Migrated project to Heroku to allow for convenient access
 
 
 Edwin: 
