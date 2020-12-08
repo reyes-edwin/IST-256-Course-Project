@@ -4,6 +4,7 @@ To start the application, first download the zip file and unzip all the files. O
 
 npm install
 npm install express -g
+npm install body-parser mongoose --save
 SET DEBUG=IST-256-Course-Project
 npm start
 
